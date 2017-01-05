@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/font-awesome.css">
 	<link rel="stylesheet" href="/css/indexstyle.css">
+	
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/wow.js"></script>
@@ -174,7 +175,7 @@
 			      			{!! Form::textarea('msgx' ,$value = null, $attributes = ['required', 'class' => 'form-control', 'name' => 'msgx']); !!}
 							</div>
 							 <div class="g-recaptcha" data-sitekey="6LcQzAgUAAAAADsYFOhtOi4qSr7rR6kwWHNORYIF"></div>
-							<button type="submit" class="btn btnstyle">Submit</button>
+							 <button type="submit" class="btn btnstyle">Submit</button>
 			  	{!! Form::close() !!}
 					{!! Captcha::script() !!}
 				</div>

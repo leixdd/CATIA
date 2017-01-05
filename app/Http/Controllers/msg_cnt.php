@@ -54,7 +54,8 @@ class msg_cnt extends Controller
         $cmd = new Storemsg($id, $title, $message, $date, $em);
         $this->dispatch($cmd);
 
-        return \Redirect::route('join.create');
+        return \Redirect::route('join.create')
+                ->with('message', 'New Account for an Applicant added');
     }
 
     /**

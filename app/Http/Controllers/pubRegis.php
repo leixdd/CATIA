@@ -32,6 +32,7 @@ class pubRegis extends Controller
     public function create()
     {
         return view('public_reg/join');
+        
     }
 
     /**

@@ -79,6 +79,9 @@
                          @if ($list_app->account_active !== 1)
                           &nbsp;|&nbsp;<a type="button" class="btn btn-xs btn-warning" href="/appaccx/{{$list_app->id}}/edit"><span class="icon-group"></span></a>
                         @endif
+                        @if ($list_app->cert !== 1)
+                         &nbsp;|&nbsp;<a type="button" class="btn btn-xs btn-default" href="/cert/{{$list_app->id}}/edit"><span class="icon-save"></span></a>
+                        @endif
                       </td>
                       <td class="text-center">
                         {!! Form::open(array('action' => ['ApplicantController@destroy', $list_app->id], 'method' => 'DELETE', 'enctype' => 'multipart/form-data')) !!}

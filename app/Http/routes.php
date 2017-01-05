@@ -72,6 +72,8 @@ Route::resource('province', 'refBRCP@prov');
 Route::resource('join', 'pubRegis');
 
 Route::resource('pdf', 'CatiaPrinting');
+Route::resource('redirc', 'redir_cnt');
+
 Route::resource('appaccx', 'ApplicantAccounts');
 Route::auth();
 Route::group(['middleware' => 'CATIA\Http\Middleware\AdminMiddleware'], function () {
@@ -97,6 +99,7 @@ Route::resource('post_pub', 'post_public');
 Route::get('/', ['uses' => 'post_public@get_in'])->name('/');
 
 Route::resource('conp', 'con_print');
+Route::resource('cert', 'cert_print');
 
 Route::get('/history', function () {
     return view('history');
