@@ -30,11 +30,47 @@ $(document).ready(function(){
         $('#age').val(a);
   });
 
+  $('.rd').click(function(){
+
+          var isValid = true;
+        $('.xzf input').each(function() {
+          if ( !$.trim($(this).val())){
+
+              isValid = false;
+              $('#rs').text("Opps.. Looks like you got some errors");
+              $('.rs-main').removeClass('alert-info');
+              $('.rs-main').addClass('alert-danger');
+          }
+              
+        });
+
+        if(isValid){
+          $('.by').show();
+          $('#rs').text('Your application is on set, Press "Print" .. ');
+          $('.rs-main').removeClass('alert-danger');
+          $('.rs-main').addClass('alert-info');
+          $('#xclose').hide();
+          
+        }
+  });
+
+  $('.by').click(function(){
+    $('#rs').text('Please go back to main page');
+    $('.xclose').show();
+    $('.by').hide();
+  });
+
+$('.xclose').click(function(){
+  window.location.replace('/');
+});
+
   // $('.yb').focusout(function(){
   //   var currentYear = new Date();
   //       userYear = $(this).text();
   //       $('#age').text(currentYear - userYear);
   // });
+
+
   $("#printz").click(function(){
     var url = $(this).attr("data-link");
      var array = [];

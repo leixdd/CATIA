@@ -14,8 +14,14 @@ class redir_cnt extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        
+        $param = session('param');
+    
+        $pdf = \PDF::loadView('PrintPreview', $param);
+        return $pdf->stream(session('param')['file']);
+
+        
     }
 
     /**

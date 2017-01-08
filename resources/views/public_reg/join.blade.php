@@ -20,7 +20,13 @@
 	<div class="home">
 			<div class="row">
 		<div class="col-lg-12" style="margin-top: 5%;">
-			@foreach($errors->all() as $error)
+		  @if(Session::has('message'))
+			<div class="alert alert-info fade in">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			{{Session::get('message')}}
+			</div>
+		 @endif
+			@foreach($errors->all() as $error)	
 			<div class="alert alert-danger">
 				{{$error}}
 			</div>
@@ -29,7 +35,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Register</div>
 				<div class="panel-body">
-					{!! Form::open(array('action' => 'pubRegis@store', 'enctype' => 'multipart/form-data')) !!}
+					{!! Form::open(array('action' => 'pubRegis@store', 'enctype' => 'multipart/form-data' , 'class' => 'xzf')) !!}
 					<div class="panel panel-primary">
 						<div class="panel-heading">Manpower Profile</div>
 						<div class="panel-body">
@@ -298,13 +304,41 @@
 						</div>
 					</div>
 					<div class="center-block text-center">
-						{!! Form::submit('Submit your Application',$attributes = ['class' => 'btn btn-success btn-lg']); !!}
+					    <button type="button" class="rd btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Submit your Application</button>
 					</div>
-					{!! Form::close() !!}
+					
 				</div>
 			</div>
 		</div>
 	</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="xclose" type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Ready to print</h4>
+      </div>
+      <div class="modal-body">
+			<div class="center-block text-center">
+				<div class="rs-main alert alert-info">
+					<p id="rs"> </p>						
+				</div>
+				{!! Form::submit('Print',$attributes = ['class' => 'by btn btn-success btn-lg', 'hidden']); !!}
+				<button type="button" hidden class="bx">xcxzc</button>
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button class="xclose" type="button" class="btn btn-default" hidden>Go back to main</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+{!! Form::close() !!}
 @endsection

@@ -42,7 +42,7 @@ class msg_cnt extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(cat $request)
+    public function store(Request $request)
     {
 
         $id = 0;

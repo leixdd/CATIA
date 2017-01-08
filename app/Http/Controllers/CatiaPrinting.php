@@ -42,8 +42,8 @@ class CatiaPrinting extends Controller
         $f = session('catia_id');
         $file = $f.".pdf";
         if ($f != "") {
-            $pdf = \PDF::loadView('PrintPreview', $param);
-            return $pdf->stream($file);
+             $pdf = \PDF::loadView('PrintPreview', $param);
+             return $pdf->download($file);
         } else {
             echo "Please Go back to the Earlier Page";
         }
