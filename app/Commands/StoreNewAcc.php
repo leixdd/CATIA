@@ -3,7 +3,7 @@ namespace CATIA\Commands;
 
 use CATIA\Commands\Commands;
 use Illuminate\Contracts\Bus\SelfHandling;
-use CATIA\User;
+use CATIA\AppAcc;
 
 class StoreNewAcc extends Command implements SelfHandling
 {
@@ -22,7 +22,7 @@ class StoreNewAcc extends Command implements SelfHandling
 
     public function handle()
     {
-        return User::create([
+        return AppAcc::create([
 
             'manpower_id' => $this->manpower_id,
             'username' => $this->username,

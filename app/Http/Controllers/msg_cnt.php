@@ -55,7 +55,7 @@ class msg_cnt extends Controller
         $this->dispatch($cmd);
 
         return \Redirect::route('join.create')
-                ->with('message', 'New Account for an Applicant added');
+                ->with('message', 'Your inquiry is already sent.');
     }
 
     /**
