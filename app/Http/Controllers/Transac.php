@@ -74,9 +74,9 @@ class Transac extends Controller
         $fee;
         $rem;
         $tot;
+        $course_x = listCourse::find($app_single['course_id'])->course;
+        $fee = listCourse::find($app_single['course_id'])->fee;
         foreach ($app_single->other_infos as $x) {
-            $course_x = listCourse::find($x->course_id)->course;
-            $fee = listCourse::find($x->course_id)->fee;
             $rem = $x->remBal;
             $tot = $x->App_Payment;
         }

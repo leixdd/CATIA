@@ -8,7 +8,7 @@ class manpower_profile extends Model
 {
     protected $table = 'manpower_profile';
 
-    protected $fillable = ['id', 'image_href', 'entry_date', 'last_name', 'first_name', 'middle_name', 'num_street', 'barangay', 'district', 'city', 'province', 'region', 'email', 'contact', 'nationality','payment','cert'];
+    protected $fillable = ['id', 'image_href', 'entry_date', 'last_name', 'first_name', 'middle_name', 'num_street', 'barangay', 'district', 'city', 'province', 'region', 'email', 'contact', 'nationality','payment','cert','course_id'];
 
     protected $hidden = [];
 

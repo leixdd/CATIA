@@ -12,15 +12,13 @@ class UpdateOtherCommand extends Command implements SelfHandling
     public $manpower_id;
     public $classification;
     public $terms;
-    public $course_id;
     public $remBal;
 
-    public function __construct($manpower_id, $classification, $terms, $course_id, $remBal)
+    public function __construct($manpower_id, $classification, $terms, $remBal)
     {
         $this->manpower_id = $manpower_id;
         $this->classification = $classification;
         $this->terms = $terms;
-        $this->course_id = $course_id;
         $this->remBal = $remBal;
     }
 
@@ -30,7 +28,6 @@ class UpdateOtherCommand extends Command implements SelfHandling
             'manpower_id' => $this->manpower_id,
             'classification' => $this->classification,
             'terms' => $this->terms,
-            'course_id' => $this->course_id,
             'remBal' => $this->remBal
         ));
     }

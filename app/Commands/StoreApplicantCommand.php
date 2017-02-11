@@ -24,8 +24,9 @@ class StoreApplicantCommand extends Command implements SelfHandling
     public $contact;
     public $nationality;
     public $payment;
+    public $course_id;
 
-    public function __construct($id, $image_href, $entry_date, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment)
+    public function __construct($id, $image_href, $entry_date, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment, $course_id)
     {
         $this->id = $id;
         $this->entry_date = $entry_date;
@@ -43,6 +44,7 @@ class StoreApplicantCommand extends Command implements SelfHandling
         $this->contact = $contact;
         $this->nationality = $nationality;
         $this->payment = $payment;
+        $this->course_id = $course_id;
     }
 
     public function handle()
@@ -64,7 +66,8 @@ class StoreApplicantCommand extends Command implements SelfHandling
             'email' => $this->email,
             'contact' => $this->contact,
             'nationality' => $this->nationality,
-            'payment' => $this->payment
+            'payment' => $this->payment,
+            'course_id' => $this->course_id,
 
         ]);
     }

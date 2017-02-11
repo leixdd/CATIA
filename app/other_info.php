@@ -8,7 +8,7 @@ class other_info extends Model
 {
     protected $table = 'other_info';
 
-    protected $fillable = ['manpower_id','classification','terms','course_id','serial','remBal', 'App_Payment', 'exp_date'];
+    protected $fillable = ['manpower_id','classification','terms','serial','remBal', 'App_Payment', 'exp_date'];
 
     protected $hidden = [];
 

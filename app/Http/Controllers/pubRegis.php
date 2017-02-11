@@ -32,7 +32,7 @@ class pubRegis extends Controller
     public function create()
     {
         return view('public_reg/join');
-        
+
     }
 
     /**
@@ -85,7 +85,7 @@ class pubRegis extends Controller
 
         //list commands
 
-        $main_command = new StoreApplicantCommand($id, $applicant_image_filename, $entry_date, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment);
+        $main_command = new StoreApplicantCommand($id, $applicant_image_filename, $entry_date, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment , $course_id);
 
         $returned = $this->dispatch($main_command);
         $returned_id = $returned->id;
@@ -107,7 +107,7 @@ class pubRegis extends Controller
 
 
         $personal_command = new StorePersonalCommand($returned_id, $sex, $cv_status, $emp_status, $bdate_month, $bdate_day, $bdate_year, $age, $bplace_city, $bplace_province, $bplace_region, $educ_attain);
-        $other_command = new StoreOtherCommand($returned_id, $classification, $terms, $course_id, $serial, $finalbal, $App_Payment, $entry_date->addDays(7));
+        $other_command = new StoreOtherCommand($returned_id, $classification, $terms,  $serial, $finalbal, $App_Payment, $entry_date->addDays(7));
 
         $this->dispatch($personal_command);
         $this->dispatch($other_command);

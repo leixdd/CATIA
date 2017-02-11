@@ -278,7 +278,7 @@
                 {!! Form::label('course', 'Course want to take') !!}
                 {!! Form::select('course', array(
                                  '1' => 'DATABASE MANAGEMENT AND APPLICATION PROGRAMMING (40 HRS)',
-                                 '2' => 'COMPUTER SYSTEMS SERVICING NCII'), $val->course_id, $attributes = ['class' => 'form-control', 'name' => 'course']) !!}
+                                 '2' => 'COMPUTER SYSTEMS SERVICING NCII'), $val->course_id, $attributes = ['class' => 'form-control course', 'name' => 'course']) !!}
               </div>
             </div>
           </div>

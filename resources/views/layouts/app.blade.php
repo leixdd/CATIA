@@ -97,12 +97,14 @@
         }
 
 
-        #conpane-down, #cmspane-down, #penpane-down, #panel-down{
+        #cmspane-down, #panel-down{
             padding: 2px;
             display: none;
             background-color:#404040;
             width: 100%;
         }
+
+
 
 
         /* On small screens, set height to 'auto' for the grid */
@@ -201,37 +203,24 @@
                   <li><a href="/adminpanel"><span class="glyphpro glyphpro-dashboard">&nbsp;</span>Dashboard</a></li>
 
                   <!-- applicants -->
-                  <li>
-                    <a href="#" id="main-down">
-                      <span class="glyphpro glyphpro-nameplate_alt">&nbsp;</span>Applicants <span class="caret"></span>
-                    </a>
-                  </li>
-                  <li id="mainpane-down">
-                    <a href="#" id="pen-down"><span class="glyphpro glyphpro-nameplate">&nbsp;</span>Pending&nbsp;<span class="caret"></span></a>
-                    <ul class="nav nav-pills nav-stacked">
-                      <li id="penpane-down">
-                        <a href="/list_pending_CS"><span class="glyphpro glyphpro-embed">&nbsp;</span>CSS</a>
-                        <a href="/list_pending_DB"><span class="glyphpro glyphpro-database_plus">&nbsp;</span>DMAP</a>
-                      </li>
-                    </ul>
-
-                    <a href="#" id="con-down"><span class="glyphpro glyphpro-nameplate">&nbsp;</span>Confirm&nbsp;<span class="caret"></span></a>
-                    <ul class="nav nav-pills nav-stacked">
-                      <li id="conpane-down">
-                        <a href="/list_confirm_CS"><span class="glyphpro glyphpro-embed">&nbsp;</span>CSS</a>
-                        <a href="/list_confirm_DB"><span class="glyphpro glyphpro-database_plus">&nbsp;</span>DMAP</a>
-                      </li>
-                    </ul>
-                  </li>
+                  <li><a href="/getCourses"><span class="glyphpro glyphpro-nameplate_alt" style="color: yellow;">&nbsp;</span>Applicants</a></li>
 
                   <li><a href="/newAdmin"><span class="glyphpro glyphpro-user_add" style="color: #209eeb;">&nbsp;</span>New Admin Account</a></li>
                   <li><a href="/msg_nt"><span class="glyphicon glyphicon-comment" style="color: green;">&nbsp;</span>Messages</a></li>
                   <li>
                     <a href="#" id="cms-down">
-                      <span class="glyphicon glyphicon-heart" style="color: red;">&nbsp;</span>CMS<span class="caret"></span>
+                      <span class="glyphicon glyphicon-heart" style="color: red;">&nbsp;</span>CMS <span class="caret"></span>
                     </a>
                   </li>
                   <li id="cmspane-down">
+                      <center>&nbsp;</center>
+                      <center><span class="label label-primary">Courses</span></center>
+                      <center>&nbsp;</center>
+                      <a href="{{ url('/course') }}"><span class="glyphicon glyphicon-book">&nbsp;</span>Courses</a>
+                      <a href="{{ route('course.create')}}"><span class="glyphicon glyphicon-leaf">&nbsp;</span>New Course</a>
+                      <center>&nbsp;</center>
+                      <center><span class="label label-success">Post</span></center>
+                      <center>&nbsp;</center>
                       <a href="{{ url('/post') }}"><span class="glyphicon glyphicon-paperclip">&nbsp;</span>Post</a>
                       <a href="{{ route('post.create')}}"><span class="glyphicon glyphicon-file">&nbsp;</span>New Post</a>
                   </li>
@@ -252,10 +241,9 @@
 
 
 
-    <!-- JavaScripts -->
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/execAjax.js"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-</body>
-</html>
-    
+      <!-- JavaScripts -->
+      <script src="/js/bootstrap.min.js"></script>
+      <script src="/js/execAjax.js"></script>
+      {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    </body>
+  </html>

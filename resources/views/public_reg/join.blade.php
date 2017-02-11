@@ -14,7 +14,7 @@
 				<h1 style="font-size: 36pt; font-weight: bold;"><font style="font-size: 50pt; font-weight: bold; color: #209eeb">|</font>Online Registration</h1>
 			</div>
 		</div>
-	</div>		
+	</div>
 </div>
 <div class="container">
 	<div class="home">
@@ -26,7 +26,7 @@
 			{{Session::get('message')}}
 			</div>
 		 @endif
-			@foreach($errors->all() as $error)	
+			@foreach($errors->all() as $error)
 			<div class="alert alert-danger">
 				{{$error}}
 			</div>
@@ -278,9 +278,7 @@
 								<div class="col-lg-12">
 									<div class="form-group">
 										{!! Form::label('course', 'Course want to take') !!}
-										{!! Form::select('course', array(
-										'1' => 'DATABASE MANAGEMENT AND APPLICATION PROGRAMMING (40 HRS)',
-										'2' => 'COMPUTER SYSTEMS SERVICING NCII'), '1', $attributes = ['class' => 'form-control', 'name' => 'course']) !!}
+										{!! Form::select('course', array('0' => 'Select Your Course'), 'Select Your Course', $attributes = ['required', 'class' => 'form-control course', 'name' => 'course']) !!}
 									</div>
 								</div>
 							</div>
@@ -306,7 +304,7 @@
 					<div class="center-block text-center">
 					    <button type="button" class="rd btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Submit your Application</button>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -327,7 +325,7 @@
       <div class="modal-body">
 			<div class="center-block text-center">
 				<div class="rs-main alert alert-info">
-					<p id="rs"> </p>						
+					<p id="rs"> </p>
 				</div>
 				{!! Form::submit('Print',$attributes = ['class' => 'by btn btn-success btn-lg', 'hidden']); !!}
 				<button type="button" hidden class="bx">xcxzc</button>

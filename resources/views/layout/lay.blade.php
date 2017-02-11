@@ -9,11 +9,12 @@
 	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/font-awesome.css">
 	<link rel="stylesheet" href="/css/indexstyle.css">
-	
+
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/wow.js"></script>
 	<script src="../js/Anim.js"></script>
+	<!-- <script src="../js/tick.js"></script> -->
 	<style>
 /* Center the loader */
 

@@ -22,6 +22,10 @@
 Route::get('/cg', 'StudController@stg');
 Route::get('/cs', 'StudController@sts');
 
+Route::resource('pgc', 'CMS_Course@pub_getCourses');
+Route::resource('getCourses', 'CMS_Course@getCourses');
+Route::resource('course', 'CMS_Course');
+Route::resource('visit', 'visit_counter@tick');
 Route::resource('post', 'post_admin');
 Route::resource('settings', 'settings_v');
 Route::resource('inbox', 'reply_logs1');
@@ -35,20 +39,19 @@ Route::resource('sendbm','MailController');
 Route::resource('application', 'ApplicantController');
 Route::resource('trans', 'Transac');
 
-Route::resource('list_pending_DB', 'ApplicantController@view_pending_DB');
-Route::resource('list_pending_CS', 'ApplicantController@view_pending_CS');
-Route::resource('list_confirm_DB', 'ApplicantController@view_confirm_DB');
-Route::resource('list_confirm_CS', 'ApplicantController@view_confirm_CS');
-
 Route::resource('search', 'ApplicantController@search');
 Route::resource('search_cn', 'search_cn');
 
 Route::resource('print','ApplicantController@printing');
 
+
+Route::get('access/{link}','ApplicantController@AccessingLink');
+
 Route::get('/gen_search/{q}',[
   'middleware' => 'auth',
   'uses' => 'ApplicantController@gen_search'
 ]);
+
 
 
 Route::resource('toFullPaid', 'ApplicantController@update_full');

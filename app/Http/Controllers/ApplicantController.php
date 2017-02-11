@@ -48,145 +48,71 @@ class ApplicantController extends Controller
         //return view('Printing/print');
 
     }
-    public function gen_search($query,$path_to_access,$access){
+    public function gen_search($query,$coursecode,$access){
+      $today = \Carbon\Carbon::now();
       $condition = 'a';
+      $status = $access == 1 ? 'Confirm' : 'Pending';
+      $emerghed = $access; //hahaha
+      $supereme = $coursecode;
+      $course = listCourse::find($coursecode)->course;
       if (manpower_profile::with('personal_infos', 'other_infos')
                 ->where([
                     ['is_active', '=', $access],
+                    ['course_id', '=', $coursecode],
                     ['last_name', 'like', '%'.$query.'%']
                   ])->orWhere([
                     ['is_active', '=', $access],
+                    ['course_id', '=', $coursecode],
                     ['first_name', 'like', '%'.$query.'%']
                   ])->orWhere([
                     ['is_active', '=', $access],
+                    ['course_id', '=', $coursecode],
                     ['middle_name', 'like', '%'.$query.'%']
                   ])->count() === 0) {
-          return view('Application_Form/'. $path_to_access, compact('condition'));
+          return view('Application_Form/Core/core_core', compact('condition','course','status', 'emerghed', 'supereme', 'today'));
       } else {
           $app_pro = manpower_profile::with('personal_infos', 'other_infos')
                     ->where([
                         ['is_active', '=', $access],
+                        ['course_id', '=', $coursecode],
                         ['last_name', 'like', '%'.$query.'%']
                       ])->orWhere([
                         ['is_active', '=', $access],
+                        ['course_id', '=', $coursecode],
                         ['first_name', 'like', '%'.$query.'%']
                       ])->orWhere([
                         ['is_active', '=', $access],
+                        ['course_id', '=', $coursecode],
                         ['middle_name', 'like', '%'.$query.'%']
                       ])->paginate(15);
           $condition = 'b';
-          $param = [];
-          foreach ($app_pro as $x) {
-              foreach ($x->other_infos as $key) {
-                  $param[''.$key->course_id.''] = listCourse::find($key->course_id)->fee;
-              }
-          }
-          $course_x = [];
-          foreach ($app_pro as $x) {
-              foreach ($x->other_infos as $key) {
-                  $course_x[''.$key->course_id.''] = listCourse::find($key->course_id)->course;
-              }
-          }
-          return view('Application_Form/'.$path_to_access, compact('app_pro', 'condition', 'param', 'course_x'));
+          $fee = listCourse::find($coursecode)->fee;
+          return view('Application_Form/Core/core_core', compact('app_pro', 'condition', 'course', 'fee', 'status', 'emerghed', 'supereme', 'today'));
       }
     }
 
-
-    public function view_pending_DB()
-    {
+    public function AccessingLink($link){
+        //$td = \Carbon\Carbon::create(2017,2,25); //serves as a tester if the task # 2 is working :)
+        $today = \Carbon\Carbon::now(); //$td->toDateString(); uncomment to match the earlier line
+        $data = explode("-", $link);
         $condition = 'a';
-        if (manpower_profile::with('personal_infos', 'other_infos')->where('is_active', 0)->count() === 0) {
-            return view('Application_Form/Pending/DB_pending', compact('condition'));
-        } else {
-            $app_pro = manpower_profile::with('personal_infos', 'other_infos')->where('is_active', 0)->paginate(15);
-            $condition = 'b';
-            $param = [];
-            foreach ($app_pro as $x) {
-                foreach ($x->other_infos as $key) {
-                    $param[''.$key->course_id.''] = listCourse::find($key->course_id)->fee;
-                }
-            }
-            $course_x = [];
-            foreach ($app_pro as $x) {
-                foreach ($x->other_infos as $key) {
-                    $course_x[''.$key->course_id.''] = listCourse::find($key->course_id)->course;
-                }
-            }
-            return view('Application_Form/Pending/DB_pending', compact('app_pro', 'condition', 'param', 'course_x'));
-        }
-    }
-
-    public function view_pending_CS()
-    {
-        $condition = 'a';
-        if (manpower_profile::with('personal_infos', 'other_infos')->where('is_active', 0)->count() === 0) {
-            return view('Application_Form/Pending/CS_pending', compact('condition'));
-        } else {
-
-            $app_pro = manpower_profile::with('personal_infos', 'other_infos')
-                      ->where('is_active', 0)->paginate(15);
-            $condition = 'b';
-            $param = [];
-            foreach ($app_pro as $x) {
-                foreach ($x->other_infos as $key) {
-                    $param[''.$key->course_id.''] = listCourse::find($key->course_id)->fee;
-                }
-            }
-            $course_x = [];
-            foreach ($app_pro as $x) {
-                foreach ($x->other_infos as $key) {
-                    $course_x[''.$key->course_id.''] = listCourse::find($key->course_id)->course;
-                }
-            }
-            return view('Application_Form/Pending/CS_pending', compact('app_pro', 'condition', 'param', 'course_x'));
-        }
-    }
-
-    public function view_confirm_DB()
-    {
-        $condition = 'a';
-        if (manpower_profile::with('personal_infos', 'other_infos')->where('is_active', 1)->count() === 0) {
-            return view('Application_Form/Confirm/view_confirm_DB', compact('condition'));
-        } else {
-            $app_pro = manpower_profile::with('personal_infos', 'other_infos')->where('is_active', 1)->paginate(15);
-            $condition = 'b';
-            $param = [];
-            foreach ($app_pro as $x) {
-                foreach ($x->other_infos as $key) {
-                    $param[''.$key->course_id.''] = listCourse::find($key->course_id)->fee;
-                }
-            }
-            $course_x = [];
-            foreach ($app_pro as $x) {
-                foreach ($x->other_infos as $key) {
-                    $course_x[''.$key->course_id.''] = listCourse::find($key->course_id)->course;
-                }
-            }
-            return view('Application_Form/Confirm/view_confirm_DB', compact('app_pro', 'condition', 'param', 'course_x'));
-        }
-    }
-
-    public function view_confirm_CS()
-    {
-        $condition = 'a';
-        if (manpower_profile::with('personal_infos', 'other_infos')->where('is_active', 1)->count() === 0) {
-            return view('Application_Form/Confirm/view_confirm_CS', compact('condition'));
-        } else {
-            $app_pro = manpower_profile::with('personal_infos', 'other_infos')->where('is_active', 1)->paginate(15);
-            $condition = 'b';
-            $param = [];
-            foreach ($app_pro as $x) {
-                foreach ($x->other_infos as $key) {
-                    $param[''.$key->course_id.''] = listCourse::find($key->course_id)->fee;
-                }
-            }
-            $course_x = [];
-            foreach ($app_pro as $x) {
-                foreach ($x->other_infos as $key) {
-                    $course_x[''.$key->course_id.''] = listCourse::find($key->course_id)->course;
-                }
-            }
-            return view('Application_Form/Confirm/view_confirm_CS', compact('app_pro', 'condition', 'param', 'course_x'));
+        $status = $data[1] == 1 ? 'Confirm' : 'Pending';
+        $emerghed = $data[1]; //hahaha
+        $supereme = $data[0];
+        $course = listCourse::find($data[0])->course;
+        if (manpower_profile::with('personal_infos', 'other_infos')->where([
+            ['is_active', '=', $data[1]],
+            ['course_id', '=', $data[0]]
+          ])->count() === 0) {
+            return view('Application_Form/Core/core_core', compact('condition','course','status', 'emerghed', 'supereme', 'today'));
+        }else{
+          $condition = 'b';
+          $app_pro = manpower_profile::with('personal_infos', 'other_infos')->where([
+                     ['is_active', '=', $data[1]],
+                     ['course_id', '=', $data[0]]
+                     ])->paginate(15);
+          $fee = listCourse::find($data[0])->fee;
+          return view('Application_Form/Core/core_core', compact('app_pro', 'condition', 'course', 'fee', 'status', 'emerghed', 'supereme', 'today'));
         }
     }
     /**
@@ -370,12 +296,12 @@ class ApplicantController extends Controller
 
         //list commands
 
-        $main_command = new UpdateApplicantCommand($id, $applicant_image_filename, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment);
+        $main_command = new UpdateApplicantCommand($id, $applicant_image_filename, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment, $course_id);
 
         $this->dispatch($main_command);
 
         $personal_command = new UpdatePersonalCommand($id, $sex, $cv_status, $emp_status, $bdate_month, $bdate_day, $bdate_year, $age, $bplace_city, $bplace_province, $bplace_region, $educ_attain);
-        $other_command = new UpdateOtherCommand($id, $classification, $terms, $course_id, $finalbal);
+        $other_command = new UpdateOtherCommand($id, $classification, $terms, $finalbal);
 
         $this->dispatch($personal_command);
         $this->dispatch($other_command);

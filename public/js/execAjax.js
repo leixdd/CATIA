@@ -4,7 +4,13 @@ $(document).ready(function(){
 
 
 
-  $.get('/city',function(data){
+  $.get('/pgc',function(data){
+      $.each(data, function(i, res){
+          $("select.course").append("<option value="+res.id+">"+res.course+" ("+ res.req_hours + " HRS)</option>")
+      });
+    });
+
+$.get('/city',function(data){
     $.each(data, function(i, res){
         //console.log(res.citymunDesc);
         $("select.city-enter").append("<option value="+res.citymunDesc+">"+res.citymunDesc+"</option>")
@@ -41,7 +47,7 @@ $(document).ready(function(){
               $('.rs-main').removeClass('alert-info');
               $('.rs-main').addClass('alert-danger');
           }
-              
+
         });
 
         if(isValid){
@@ -50,7 +56,7 @@ $(document).ready(function(){
           $('.rs-main').removeClass('alert-danger');
           $('.rs-main').addClass('alert-info');
           $('#xclose').hide();
-          
+
         }
   });
 
@@ -90,7 +96,7 @@ $('.xclose').click(function(){
          array.push(arrayItem);
      });
 
-     
+
      $.each(array, function(index, item){
        var x = document.getElementById("db").insertRow();
        var a = x.insertCell(0);
@@ -106,7 +112,7 @@ $('.xclose').click(function(){
        d.innerHTML = array[index].Middlename;
        e.innerHTML = array[index].Contact;
        f.innerHTML = array[index].Address;
-       
+
      });
      var pdf = new jsPDF('p', 'pt', 'letter');
       // source can be HTML-formatted string, or a reference
@@ -170,7 +176,7 @@ $('.xclose').click(function(){
          array.push(arrayItem);
      });
 
-     
+
      $.each(array, function(index, item){
        var x = document.getElementById("db").insertRow();
        var a = x.insertCell(0);
@@ -187,7 +193,7 @@ $('.xclose').click(function(){
        e.innerHTML = array[index].Course_Fee;
        f.innerHTML = array[index].Payment;
        g.innerHTML = array[index].Balance;
-       
+
      });
      var pdf = new jsPDF('p', 'pt', 'letter');
       // source can be HTML-formatted string, or a reference
