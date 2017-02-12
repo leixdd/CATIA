@@ -21,6 +21,7 @@
         $(document).ready(function(){
             $("#tog-down").click(function(){
                 $("#panel-down").slideToggle("fast");
+                $("#tog-down").toggleClass("active");
             });
         });
     </script>
@@ -135,11 +136,9 @@
                     <!-- Authentication Links -->
                     <li id="panel-dow">
                         <a href="{{ url('/O_portal') }}"><span class="glyphicon glyphicon-log-out">&nbsp;</span>Logout</a>
-                        <a href="/list_pending"><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</a>
                     </li>
-                    <li><a href="/students"><span class="glyphpro glyphpro-dashboard">&nbsp;</span>Dashboard</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-comment" style="color: green;">&nbsp;</span>Messages</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-heart" style="color: red;">&nbsp;</span>Books</a></li>
+                    <li><a href="/students"><span class="glyphpro glyphpro-dashboard">&nbsp;</span>Newsfeed</a></li>
+                    <li><a href="/students/{{$id_set}}"><span class="glyphicon glyphicon-comment" style="color: green;">&nbsp;</span>Account</a></li>
                 </ul>
             </div>
         </div>
@@ -167,17 +166,15 @@
             <h4 class="text-center" style="margin-bottom: 25%;"><a style="color :  #ffffff; text-decoration: none;"  href="{{ url('/login') }}">Catia Foundation Inc.</a></h4>
           <ul class="nav nav-pills nav-stacked">
             <li>
-                <a class="active" id="tog-down23" href="#">
+                <a id="tog-down" href="#">
                     <span class="glyphicon glyphicon-user">&nbsp;</span>@yield('username')<span class="caret"></span>
                 </a>
             </li>
-            <li id="panel-down23">
+            <li id="panel-down">
                 <a href="{{ url('/O_portal') }}"><span class="glyphicon glyphicon-log-out">&nbsp;</span>Logout</a>
-                <a href="/list_pending"><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</a>
             </li>
-            <li><a href="/students"><span class="glyphpro glyphpro-dashboard">&nbsp;</span>Dashboard</a></li>
-            <li><a href=""><span class="glyphicon glyphicon-comment" style="color: green;">&nbsp;</span>Messages</a></li>
-            <li><a href=""><span class="glyphicon glyphicon-heart" style="color: red;">&nbsp;</span>Books</a></li>
+            <li><a href="/students"><span class="glyphpro glyphpro-dashboard">&nbsp;</span>Newsfeed</a></li>
+            <li><a href="/students/{{$id_set}}"><span class="glyphicon glyphicon-comment" style="color: green;">&nbsp;</span>Account</a></li>
           </ul><br>
       </div>
         <br />

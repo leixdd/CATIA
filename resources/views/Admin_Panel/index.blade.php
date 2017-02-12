@@ -31,7 +31,7 @@
       <div class="panel panel-warning">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-sm-3"> 
+            <div class="col-sm-3">
               <span class="glyphicon glyphicon-briefcase" style="font-size: 50pt"></span>
             </div>
             <div class="col-md-9">
@@ -118,15 +118,34 @@
     <div class="col-lg-12">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i>Site's Traffic </h3>
+          <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i>Visitor's Logs - Total Visitors  "<b>{{$visit_count}}</b>"</h3>
         </div>
         <div class="panel-body">
-          <div class="flot-chart">
-            <div class="flot-chart-content" id="flot-chart-moving-line"></div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-hover" id="dataTable">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>IP Address</th>
+                  <th>Visit Date</th>
+                  <th>Visit Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($visitors as $v)
+                  <tr>
+                    <td>{{$v->id}}</td>
+                    <td>{{$v->ip}}</td>
+                    <td>{{$v->visit_date}}</td>
+                    <td>{{$v->visit_time}}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
-          <div class="text-right">
-            <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
+
+          <center>{{ $visitors->render()}}</center>
+
         </div>
       </div>
     </div>

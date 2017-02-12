@@ -10,6 +10,9 @@ use CATIA\Http\Requests\StudRequest;
 use Hash;
 use Cookie;
 use CATIA\AppAcc;
+use CATIA\manpower_profile;
+use CATIA\other_info;
+use CATIA\listCourse;
 
 class StudController extends Controller
 {
@@ -22,7 +25,7 @@ class StudController extends Controller
      public function __construct()
      {
          //$this->middleware('auth');
-         
+
      }
 
 
@@ -34,9 +37,10 @@ class StudController extends Controller
           // $request->session()->flush();
           // $response = new Response();
           // $response->withCookie(Cookie::forget('sname'));
-          $set = $request->cookie('sname');
-          $request->session()->put('std', $set);
-          return view('Client\student');
+          $set = explode("-", $request->cookie('sname'));
+          $request->session()->put('std', $set[0]);
+          $id_set = $set[1];
+          return view('Client\student', compact('id_set'));
             //session()->save();
 
         }else{
@@ -68,7 +72,7 @@ class StudController extends Controller
           AppAcc::where('manpower_id',$value->manpower_id)
                   ->update(['timelogin' => $curdate]);
           return redirect('/cs')
-                ->with('std_n', $value->username);
+                ->with('std_n', $value->username."-".$value->manpower_id);
         }else{
           //test
           echo $checker ;
@@ -112,7 +116,14 @@ class StudController extends Controller
      */
     public function show($id)
     {
-        //
+        $app_pro = manpower_profile::with('personal_infos', 'other_infos')->where("id", $id)->get();
+        foreach($app_pro as $ap){
+          $course_id = $ap['course_id'];
+        }
+        $course = listCourse::find($course_id)->course;
+        $fee = listCourse::find($course_id)->fee;
+        $id_set = $id;
+        return view('Client/account', compact('app_pro','course', 'fee', 'id_set'));
     }
 
     /**

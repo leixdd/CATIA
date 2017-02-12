@@ -7,6 +7,7 @@ use CATIA\Http\Requests;
 use CATIA\msg;
 use CATIA\manpower_profile;
 use CATIA\User;
+use CATIA\Visitors;
 
 class AdminPanelController extends Controller
 {
@@ -27,10 +28,13 @@ class AdminPanelController extends Controller
         $count_app = manpower_profile::count();
         $count_msg = msg::count();
         $count_use = User::count();
-        return view('Admin_Panel\index', compact('list'))
+        $visit_count = Visitors::count();
+        $visitors = Visitors::Paginate(7);
+        return view('Admin_Panel\index', compact('list','visitors'))
                     ->with('app_count', $count_app)
                     ->with('msg_count', $count_msg)
-                    ->with('use_count', $count_use);
+                    ->with('use_count', $count_use)
+                    ->with('visit_count', $visit_count);
     }
     public function x()
     {

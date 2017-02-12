@@ -403,10 +403,10 @@ $('.xclose').click(function(){
     $('.delete-val').val(applicant_id);
   });
 
-  $("#tog-down").click(function(){
-      $("#panel-down").slideToggle("fast");
-      $("#tog-down").toggleClass("active");
-  });
+  // $("#tog-down").click(function(){
+  //     $("#panel-down").slideToggle("fast");
+  //     $("#tog-down").toggleClass("active");
+  // });
 
   $("#main-down").click(function(){
     $("#panel-down").slideUp("fast");
