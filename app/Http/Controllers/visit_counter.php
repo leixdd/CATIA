@@ -11,13 +11,13 @@ class visit_counter extends Controller
 {
 
     public function tick(Request $request){
-      $ip = $request->ip();
+      $ip = $_SERVER['REMOTE_ADDR'];
       $vd = \Carbon\Carbon::now()->toDateString();
-      $vt = \Carbon\Carbon::now()->toTimeString();
+      $vt = \Carbon\Carbon::now('GMT+8')->toTimeString();
 
       $tick = new ticker(0, $ip, $vd, $vt);
       $this->dispatch($tick);
-      return 'ok';
+      return 'Ok';
     }
     /**
      * Display a listing of the resource.

@@ -14,6 +14,7 @@
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/wow.js"></script>
 	<script src="../js/Anim.js"></script>
+	<script src="../js/tick.js"></script>
 	<style>
 /* Center the loader */
 

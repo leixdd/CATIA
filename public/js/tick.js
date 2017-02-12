@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   $.ajax({
-    type: "POST",
+    type: "GET",
     url: "/visit",
     beforeSend: function (xhr) {
          var token = $('meta[name="csrf_token"]').attr('content');
@@ -12,10 +12,7 @@ $(document).ready(function(){
      },
      dataType: 'json',
      success: function(data){
-       $(".post_title").text(data.post_title);
-        $(".post_content").empty();
-       $(".post_content").append(data.post_content);
-       $(".post_thumb").attr("src", data.post_thumb);
+       console.log(data);
      }
   });
 
