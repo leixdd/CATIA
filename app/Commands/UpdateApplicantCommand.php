@@ -24,8 +24,9 @@ class UpdateApplicantCommand extends Command implements SelfHandling
     public $nationality;
     public $payment;
     public $course_id;
+    public $batch;
 
-    public function __construct($id, $image_href, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment, $course_id)
+    public function __construct($id, $image_href, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment, $course_id, $batch)
     {
         $this->id = $id;
         $this->image_href = $image_href;
@@ -43,6 +44,7 @@ class UpdateApplicantCommand extends Command implements SelfHandling
         $this->nationality = $nationality;
         $this->payment = $payment;
         $this->course_id = $course_id;
+        $this->batch = $batch;
     }
 
     public function handle()
@@ -64,6 +66,7 @@ class UpdateApplicantCommand extends Command implements SelfHandling
             'nationality' => $this->nationality,
             'payment' => $this->payment,
             'course_id' => $this->course_id,
+            'batch' => $this->batch
 
         ));
     }

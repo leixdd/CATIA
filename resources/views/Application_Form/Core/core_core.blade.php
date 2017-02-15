@@ -114,6 +114,7 @@
             <thead>
               <tr>
                 <th>id</th>
+                <th>batch</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Middlename</th>
@@ -127,6 +128,7 @@
               @foreach($app_pro as $list_app)
               <tr>
                 <td>{{$list_app->id}}</td>
+                <td>{{$list_app->batch}}</td>
                 <td>{{$list_app->first_name}}</td>
                 <td>{{$list_app->last_name}}</td>
                 <td>{{$list_app->middle_name}}</td>

@@ -19,6 +19,10 @@ use CATIA\Http\Requests;
 use CATIA\manpower_profile;
 use CATIA\listCourse;
 use CATIA\other_info;
+use CATIA\batching;
+use CATIA\Commands\batchingTick;
+use CATIA\Commands\batchUpdate;
+use CATIA\AppAcc;
 
 use Session;
 use Carbon;
@@ -48,6 +52,7 @@ class ApplicantController extends Controller
         //return view('Printing/print');
 
     }
+
     public function gen_search($query,$coursecode,$access){
       $today = \Carbon\Carbon::now();
       $condition = 'a';
@@ -90,6 +95,24 @@ class ApplicantController extends Controller
           return view('Application_Form/Core/core_core', compact('app_pro', 'condition', 'course', 'fee', 'status', 'emerghed', 'supereme', 'today'));
       }
     }
+
+    public function batching()
+    {
+        $advanced = \Carbon\Carbon::now()->addDays(2);
+        $last_batch = batching::orderBy('id','desc')->first();
+        if($last_batch['population'] === 10){
+          $this->dispatch(new batchUpdate($last_batch['id'], \Carbon\Carbon::now(), ($last_batch['population'] + 1 )));
+        }elseif ($last_batch['population'] === 15 || $advanced->toDateString() === $last_batch['tenthActivation']) {
+          $this->dispatch(new batchingTick(0, ($last_batch['batch'] + 1), 1, 0000-00-00));
+        }else{
+          $this->dispatch(new batchUpdate($last_batch['id'], $last_batch['tenthActivation'], ($last_batch['population'] + 1 )));
+        }
+
+        $refresh = batching::orderBy('id','desc')->first();
+        return $refresh['batch'];
+
+    }
+
 
     public function AccessingLink($link){
         //$td = \Carbon\Carbon::create(2017,2,25); //serves as a tester if the task # 2 is working :)
@@ -329,7 +352,7 @@ class ApplicantController extends Controller
         $is_active = 0;
         if ($check_bal == 0) {
             $is_active = 1;
-            $main_command = new FullPaid($id, $is_active);
+            $main_command = new FullPaid($id, $is_active, ApplicantController::batching());
 
             $this->dispatch($main_command);
             return \Redirect::route('adminpanel.index')
@@ -357,6 +380,7 @@ class ApplicantController extends Controller
         $this->dispatch($delete_command);
         $this->dispatch($delete_personalcommand);
         $this->dispatch($delete_othercommand);
+        AppAcc::where('manpower_id', $id)->delete();
 
         return \Redirect::route('adminpanel.index')
                 ->with('message', 'Applicant #' . $id . ' already deleted to the list');
