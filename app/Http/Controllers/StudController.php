@@ -13,6 +13,7 @@ use CATIA\AppAcc;
 use CATIA\manpower_profile;
 use CATIA\other_info;
 use CATIA\listCourse;
+use CATIA\post;
 
 class StudController extends Controller
 {
@@ -40,7 +41,8 @@ class StudController extends Controller
           $set = explode("-", $request->cookie('sname'));
           $request->session()->put('std', $set[0]);
           $id_set = $set[1];
-          return view('Client\student', compact('id_set'));
+          $lst = post::get();
+          return view('Client\student', compact('id_set', 'lst'));
             //session()->save();
 
         }else{
@@ -63,21 +65,26 @@ class StudController extends Controller
 
     public function login(StudRequest $request){
       $curdate = \Carbon\Carbon::now();
-      $acc = AppAcc::where('username', $request->input('username'))->get();
-      foreach ($acc as $key => $value) {
-        $checker = Hash::check($request->input('pwd'), $value->password );
-        if($checker){
-          session()->put('std_login', bcrypt($curdate));
-          session()->save();
-          AppAcc::where('manpower_id',$value->manpower_id)
-                  ->update(['timelogin' => $curdate]);
-          return redirect('/cs')
-                ->with('std_n', $value->username."-".$value->manpower_id);
-        }else{
-          //test
-          echo $checker ;
+      if(AppAcc::where('username', $request->input('username'))->count() === 0){
+        return view('Client\login')->with('message','Something wrong. Please login');
+      }else{
+        $acc = AppAcc::where('username', $request->input('username'))->get();
+        foreach ($acc as $key => $value) {
+          $checker = Hash::check($request->input('pwd'), $value->password );
+          if($checker){
+            session()->put('std_login', bcrypt($curdate));
+            session()->save();
+            AppAcc::where('manpower_id',$value->manpower_id)
+                    ->update(['timelogin' => $curdate]);
+            return redirect('/cs')
+                  ->with('std_n', $value->username."-".$value->manpower_id);
+          }else{
+            //test
+
+          }
         }
       }
+
     }
 
     public function logout(Request $request){

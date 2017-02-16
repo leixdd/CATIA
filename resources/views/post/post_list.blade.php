@@ -1,4 +1,4 @@
-@extends('layouts/app')
+@extends('layouts.app')
 
 @section('content')
   <h1 style="padding-bottom: 50px;"><b><span style="color: #209eeb;">| </span>Post</b></h1>

@@ -19,10 +19,34 @@
     <script src="/js/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("#tog-down").click(function(){
-                $("#panel-down").slideToggle("fast");
-                $("#tog-down").toggleClass("active");
+            $("#tog-down23").click(function(){
+                $("#panel-down23").slideToggle("fast");
+                $("#tog-down23").toggleClass("active");
             });
+
+            $('.view-m-post').click(function(){
+              var hold_id = $(this).val();
+
+              $.ajax({
+                type: "GET",
+                url: "/newsfeed/" + hold_id,
+                beforeSend: function (xhr) {
+                     var token = $('meta[name="csrf_token"]').attr('content');
+
+                     if (token) {
+                           return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                     }
+                 },
+                 dataType: 'json',
+                 success: function(data){
+                   $(".post_title").text(data.post_title);
+                    $(".post_content").empty();
+                   $(".post_content").append(data.post_content);
+                   $(".post_thumb").attr("src", data.post_thumb);
+                 }
+              });
+            });
+
         });
     </script>
 
@@ -91,7 +115,7 @@
         }
 
 
-        #panel-down{
+        #panel-down23{
             padding: 5px;
             display: none;
             background-color:#404040;
@@ -151,7 +175,7 @@
               <h1><img src="/images/CATIA_IMAGES/Catia_Logo.png" class="" width="20%;"><a style="color :  #5e5ce1; text-decoration: none;" href="{{ url('/login') }}">Catia</a></h1>
             <ul class="nav nav-pills nav-stacked">
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">You're not logged in</a></li>
+                    <li><a href="{{ url('/portal') }}">You're not logged in</a></li>
                 @else
 
                     <li><a class="active" href="/home"><span class="glyphpro glyphpro-dashboard">&nbsp;</span>Dashboard</a></li>
@@ -163,14 +187,14 @@
         <!-- The real one -->
         <div class="col-sm-2 sidenav hidden-xs">
             <img src="/images/CATIA_IMAGES/Catia_Logo.png"  width="50%;" style="margin-top: 15px; margin-left: 25%; margin-right:auto;">
-            <h4 class="text-center" style="margin-bottom: 25%;"><a style="color :  #ffffff; text-decoration: none;"  href="{{ url('/login') }}">Catia Foundation Inc.</a></h4>
+            <h4 class="text-center" style="margin-bottom: 25%;"><a style="color :  #ffffff; text-decoration: none;"  href="{{ url('/') }}">Catia Foundation Inc.</a></h4>
           <ul class="nav nav-pills nav-stacked">
             <li>
-                <a id="tog-down" href="#">
+                <a id="tog-down23" href="#">
                     <span class="glyphicon glyphicon-user">&nbsp;</span>@yield('username')<span class="caret"></span>
                 </a>
             </li>
-            <li id="panel-down">
+            <li id="panel-down23">
                 <a href="{{ url('/O_portal') }}"><span class="glyphicon glyphicon-log-out">&nbsp;</span>Logout</a>
             </li>
             <li><a href="/students"><span class="glyphpro glyphpro-dashboard">&nbsp;</span>Newsfeed</a></li>

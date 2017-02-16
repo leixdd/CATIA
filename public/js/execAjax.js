@@ -10,6 +10,12 @@ $(document).ready(function(){
       });
     });
 
+$.get('/genbatch',function(data){
+    $.each(data, function(i, res){
+        $("select.batch_sort").append("<option value="+res.id+"> Batch "+res.batch+" ("+ res.population + " students)</option>")
+    });
+  });
+
 $.get('/city',function(data){
     $.each(data, function(i, res){
         //console.log(res.citymunDesc);
@@ -82,7 +88,7 @@ $('.xclose').click(function(){
      var array = [];
      var headers = [];
      $('#dataTable th').each(function(index, item) {
-        if(index < 6){
+        if(index < 7){
           headers[index] = $(item).html();
         }
      });
@@ -90,7 +96,7 @@ $('.xclose').click(function(){
      $('#dataTable tr').has('td').each(function() {
          var arrayItem = {};
          $('td', $(this)).each(function(index, item) {
-           if(index < 6)
+           if(index < 7)
              arrayItem[headers[index]] = $(item).html();
          });
          array.push(arrayItem);
@@ -105,14 +111,15 @@ $('.xclose').click(function(){
        var d = x.insertCell(3);
        var e = x.insertCell(4);
        var f = x.insertCell(5);
+       var g = x.insertCell(6);
 
        a.innerHTML = array[index].id;
-       b.innerHTML = array[index].Firstname;
-       c.innerHTML = array[index].Lastname;
-       d.innerHTML = array[index].Middlename;
-       e.innerHTML = array[index].Contact;
-       f.innerHTML = array[index].Address;
-
+       b.innerHTML = array[index].batch;
+       c.innerHTML = array[index].Firstname;
+       d.innerHTML = array[index].Lastname;
+       e.innerHTML = array[index].Middlename;
+       f.innerHTML = array[index].Contact;
+       g.innerHTML = array[index].Address;
      });
      var pdf = new jsPDF('p', 'pt', 'letter');
       // source can be HTML-formatted string, or a reference
@@ -411,13 +418,13 @@ $('.xclose').click(function(){
   $("#main-down").click(function(){
     $("#panel-down").slideUp("fast");
     $("#tog-down").removeClass("active");
-      $("#mainpane-down").slideToggle("fast");
-      $("#main-down").toggleClass("active");
+    $("#mainpane-down").slideToggle("fast");
+    $("#main-down").toggleClass("active");
   });
 
-  $("#tog-down23").click(function(){
-      $("#panel-down23").slideToggle("fast");
-      $("#tog-down23").toggleClass("active");
+  $("#tog-down").click(function(){
+      $("#panel-down").slideToggle("fast");
+      $("#tog-down").toggleClass("active");
   });
 
   $("#main-down23").click(function(){

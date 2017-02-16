@@ -43,14 +43,59 @@ class ApplicantController extends Controller
     {
     }
 
-    public function search(Request $request){
-        return ApplicantController::gen_search($request->input('search_name'),$request->input('path'),$request->input('accessx'));
+    public function batch_gen(){
+
+      $rv = batching::get();
+
+      return $rv;
     }
+
+    public function getBatch(Request $request){
+      return ApplicantController::batch_search($request->input('batch_sort'),$request->input('path'),$request->input('accessx'));
+    }
+
+
+    public function batch_search($query,$coursecode,$access){
+      $today = \Carbon\Carbon::now();
+      $condition = 'a';
+      $status = $access == 1 ? 'Confirm' : 'Pending';
+      $emerghed = $access; //hahaha
+      $supereme = $coursecode;
+      $course = listCourse::find($coursecode)->course;
+      if($query != 0){
+        if (manpower_profile::with('personal_infos', 'other_infos')
+                  ->where([
+                      ['is_active', '=', $access],
+                      ['course_id', '=', $coursecode],
+                      ['batch', '=', $query]
+                    ])->count() === 0) {
+            return view('Application_Form/Core/core_core', compact('condition','course','status', 'emerghed', 'supereme', 'today'));
+        } else {
+            $app_pro = manpower_profile::with('personal_infos', 'other_infos')
+                      ->where([
+                          ['is_active', '=', $access],
+                          ['course_id', '=', $coursecode],
+                          ['batch', '=', $query]
+                        ])->paginate(15);
+            $condition = 'b';
+            $fee = listCourse::find($coursecode)->fee;
+            return view('Application_Form/Core/core_core', compact('app_pro', 'condition', 'course', 'fee', 'status', 'emerghed', 'supereme', 'today'));
+        }
+      }else{
+        return ApplicantController::AccessingLink(implode("-",array($emerghed,$supereme)));
+      }
+
+    }
+
     public function printing(Request $request){
 
         print_r($request->input('array'));
         //return view('Printing/print');
 
+    }
+
+    public function search(Request $request){
+        return ApplicantController::gen_search($request->input('search_name'),$request->input('path'),$request->input('accessx'));
     }
 
     public function gen_search($query,$coursecode,$access){

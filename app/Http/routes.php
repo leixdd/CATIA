@@ -24,6 +24,7 @@ Route::get('/cs', 'StudController@sts');
 
 //Route::get('/b', 'ApplicantController@batching');
 Route::resource('pgc', 'CMS_Course@pub_getCourses');
+Route::resource('genbatch', 'ApplicantController@batch_gen');
 Route::resource('getCourses', 'CMS_Course@getCourses');
 Route::resource('course', 'CMS_Course');
 Route::resource('visit', 'visit_counter@tick');
@@ -39,7 +40,7 @@ Route::resource('sendbm','MailController');
 
 Route::resource('application', 'ApplicantController');
 Route::resource('trans', 'Transac');
-
+Route::resource('sortBatch', 'ApplicantController@getBatch');
 Route::resource('search', 'ApplicantController@search');
 Route::resource('search_cn', 'search_cn');
 
@@ -58,7 +59,7 @@ Route::get('/gen_search/{q}',[
 Route::resource('toFullPaid', 'ApplicantController@update_full');
 
 Route::resource('city', 'refBRCP@city');
-
+Route::resource('newsfeed', 'newsfeed');
 Route::resource('students', 'StudController');
 
 Route::get('portal', 'StudController@showlogin');

@@ -2,19 +2,6 @@
 
 @section('content')
 
-<style>
-
-.flot-chart {
-  display: block;
-  height: 400px;
-}
-
-.flot-chart-content {
-  width: 100%;
-  height: 100%;
-}
-
-</style>
   @if(Session::has('message'))
     <div class="alert alert-info fade in">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -222,12 +209,12 @@
   </div>
 
 
-<script src="/js/tablesorter/jquery.tablesorter.js"></script>
+<!-- <script src="/js/tablesorter/jquery.tablesorter.js"></script>
 <script src="/js/tablesorter/tables.js"></script>
-<!--[if lte IE 8]><script src="/js/excanvas.min.js"></script><![endif]-->
+[if lte IE 8]><script src="/js/excanvas.min.js"></script>
 <script src="/js/flot/jquery.flot.js"></script>
 <script src="/js/flot/jquery.flot.tooltip.min.js"></script>
 <script src="/js/flot/jquery.flot.resize.js"></script>
 <script src="/js/flot/jquery.flot.pie.js"></script>
-<script src="/js/flot/chart-data-flot.js"></script>
+<script src="/js/flot/chart-data-flot.js"></script> -->
 @endsection

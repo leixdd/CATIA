@@ -12,6 +12,13 @@
         <div class="panel-heading">Login</div>
 
         <div class="panel-body">
+          @if(Session::has('message'))
+            <div class="alert alert-info fade in">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{Session::get('message')}}
+            </div>
+          @endif
+          
                 {!! Form::open(array('class' => 'form-horizontal', 'method' => 'POST', 'url' => '/portal' , 'enctype' => 'multipart/form-data')) !!}
                 {{ csrf_field() }}
 

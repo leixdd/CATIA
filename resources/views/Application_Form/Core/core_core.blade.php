@@ -25,14 +25,33 @@
       </div>
     {!! Form::close() !!}
     <div class="col-lg-4 col-md-offset-1">
+
         <div class="form-group">
           {!! Form::label('', 'Controls') !!}
           @if($status == 'Pending')
          <a id="printy" type="button" class="btn btn-primary form-control">Print the Results</a>
          @else
          <button id="printz" class="btn btn-primary form-control">Print the Results</button>
+
          @endif
         </div>
+        @if($status == 'Confirm')
+      {!! Form::open(['url' => '/sortBatch', 'class' => 'form-horizontal']) !!}
+        <div class="form-group">
+          {!! Form::hidden('path', $value = $supereme, $attributes = ['class' => 'form-control', 'name' => 'path']) !!}
+          {!! Form::hidden('accessx', $value = $emerghed, $attributes = ['class' => 'form-control', 'name' => 'accessx']) !!}
+          <div class="row">
+            <div class="col-sm-9">
+                {!! Form::select('batch_sort',  array('0' => 'All Students'), 'All Students', $attributes = [ 'required','class' => 'form-control batch_sort', 'name' => 'batch_sort']) !!}
+            </div>
+            <div class="col-sm-3">
+              {!! Form::submit('Sort', $attributes = ['class' => 'btn btn-danger btn-md form-control']); !!}
+            </div>
+          </div>
+        </div>
+        @endif
+
+      {!! Form::close() !!}
     </div>
   </div>
 </div>
@@ -177,14 +196,20 @@
       <table id="db" class="table table-bordered table-condensed table-hover" style="width:100%">
           <tr>
             <th>id</th>
+            @if($status == 'Pending')
+
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Middlename</th>
-            @if($status == 'Pending')
+
             <th class="text-center">Course Fee</th>
             <th class="text-center">Payment</th>
             <th class="text-center">Balance</th>
             @else
+            <th>Batch</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Middlename</th>
             <th class="text-center">Contact</th>
             <th class="text-center">Address</th>
             @endif
