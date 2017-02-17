@@ -15,10 +15,11 @@ class CMS_Course extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     public function getCourses(){
+      $this->middleware('auth');
       $b = Course::get();
       return view('Admin_Panel/course_app', compact('b'));
     }
@@ -35,6 +36,7 @@ class CMS_Course extends Controller
      */
     public function index()
     {
+      $this->middleware('auth');
       $course_list = Course::get();
       return view('CourseCMS/index', compact('course_list'));
     }
@@ -46,6 +48,7 @@ class CMS_Course extends Controller
      */
     public function create()
     {
+        $this->middleware('auth');
         return view('CourseCMS/create');
     }
 
@@ -57,6 +60,7 @@ class CMS_Course extends Controller
      */
     public function store(Request $request)
     {
+      $this->middleware('auth');
       $CreateCourse = new CourseCreate(0, $request->input('course'),$request->input('sn'),$request->input('req_hrs'),$request->input('hps'),$request->input('day'),$request->input('sched'),$request->input('fee'));
       $this->dispatch($CreateCourse);
 
@@ -83,6 +87,7 @@ class CMS_Course extends Controller
      */
     public function edit($id)
     {
+      $this->middleware('auth');
       $course_s = Course::find($id);
       return view('CourseCMS/edit', compact('course_s'));
     }
@@ -96,7 +101,7 @@ class CMS_Course extends Controller
      */
     public function update(Request $request, $id)
     {
-
+      $this->middleware('auth');
       $updateCourse = new CourseUpdate($id, $request->input('course'),$request->input('sn'),$request->input('req_hrs'),$request->input('hps'),$request->input('day'),$request->input('sched'),$request->input('fee'));
       $this->dispatch($updateCourse);
 
@@ -113,7 +118,7 @@ class CMS_Course extends Controller
     public function destroy($id)
     {
       $delete_course = new CourseDelete($id);
-
+      $this->middleware('auth');
       $this->dispatch($delete_course);
       return \Redirect::route('adminpanel.index')
               ->with('message', 'Course #' . $id . ' already deleted to the list');

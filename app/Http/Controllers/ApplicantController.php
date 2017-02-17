@@ -46,7 +46,6 @@ class ApplicantController extends Controller
     public function batch_gen(){
 
       $rv = batching::get();
-
       return $rv;
     }
 

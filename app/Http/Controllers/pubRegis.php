@@ -85,7 +85,7 @@ class pubRegis extends Controller
 
         //list commands
 
-        $main_command = new StoreApplicantCommand($id, $applicant_image_filename, $entry_date, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment , $course_id);
+        $main_command = new StoreApplicantCommand($id, $applicant_image_filename, $entry_date, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment , $course_id, 0);
 
         $returned = $this->dispatch($main_command);
         $returned_id = $returned->id;
