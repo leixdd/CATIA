@@ -29,7 +29,7 @@ class AdminPanelController extends Controller
         $count_msg = msg::count();
         $count_use = User::count();
         $visit_count = Visitors::count();
-        $visitors = Visitors::Paginate(7);
+        $visitors = Visitors::orderBy('id','desc')->Paginate(7);
         return view('Admin_Panel\index', compact('list','visitors'))
                     ->with('app_count', $count_app)
                     ->with('msg_count', $count_msg)
