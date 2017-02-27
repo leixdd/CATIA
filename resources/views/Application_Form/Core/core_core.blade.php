@@ -47,10 +47,14 @@
 
           @if($status == 'Pending')
          <a id="printy" type="button" class="btn btn-primary ">Print the Results</a>
-         @else
-         <button id="printz" class="btn btn-primary form-control">Print the Results</button>
+         @elseif($condition !== 'c')
+          <button id="printz" class="btn btn-primary form-control">Print the Results</button>
 
-         @endif
+          @else
+
+            <button id="pz" class="btn btn-primary form-control">Print the Results</button>
+
+           @endif
 
 
     </div>
@@ -134,7 +138,9 @@
             <thead>
               <tr>
                 <th>id</th>
+                @if($condition !== 'c')
                 <th>batch</th>
+                @endif
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Middlename</th>
@@ -148,7 +154,9 @@
               @foreach($app_pro as $list_app)
               <tr>
                 <td>{{$list_app->id}}</td>
+                @if($condition !== 'c')
                 <td>{{$list_app->batch}}</td>
+                @endif
                 <td>{{$list_app->first_name}}</td>
                 <td>{{$list_app->last_name}}</td>
                 <td>{{$list_app->middle_name}}</td>
@@ -193,6 +201,14 @@
       <div class="col-lg-12 col-md-offset-1" style="margin-bottom: 3%;">
           <b style="font-size: 16pt">{{$course}} - {{$status}} Applicants</b>
       </div>
+
+      @if($condition === 'c')
+      <div class="col-lg-12 col-md-offset-1" style="margin-bottom: 3%;">
+          @foreach($app_pro as $list_app)
+          <b style="font-size: 16pt; padding-left: 17%;">Batch {{$list_app->batch}}</b>
+          @endforeach
+      </div>
+      @endif
     </div>
       <table id="db" class="table table-bordered table-condensed table-hover" style="width:100%">
           <tr>
@@ -207,7 +223,11 @@
             <th class="text-center">Payment</th>
             <th class="text-center">Balance</th>
             @else
+
+            @if($condition !== 'c')
             <th>Batch</th>
+            @endif
+
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Middlename</th>

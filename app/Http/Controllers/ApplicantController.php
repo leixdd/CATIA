@@ -76,7 +76,7 @@ class ApplicantController extends Controller
                           ['course_id', '=', $coursecode],
                           ['batch', '=', $query]
                         ])->paginate(15);
-            $condition = 'b';
+            $condition = 'c';
             $fee = listCourse::find($coursecode)->fee;
             return view('Application_Form/Core/core_core', compact('app_pro', 'condition', 'course', 'fee', 'status', 'emerghed', 'supereme', 'today'));
         }
