@@ -11,7 +11,18 @@
 
   <div class="alert alert-info">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <h2 class="text-center">Welcome Back! {{ Auth::user()->name }} </h2>
+    <h5 class="text-center">
+
+      Welcome Back! {{ Auth::user()->name }}
+    </br></br>
+      There are few things that must to configured if you've getting error in accessing post module
+      </br>
+      execute this sql query to your database(catia)
+      </br></br></br>
+      ALTER TABLE `post` ADD `is_main` INT NOT NULL DEFAULT '0' AFTER `post_thumb`;
+      </br></br></br>
+      Current Version 3.0
+    </h5>
   </div>
   <div class="row">
     <div class="col-md-4">

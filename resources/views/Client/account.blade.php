@@ -7,13 +7,37 @@
 
 @section('content')
 
-<h1 style="padding-bottom: 50px;"><b><span style="color: #209eeb;">| </span>Your Account</b></h1>
+<h1 style="padding-bottom: 50px;"><b><span style="color: #209eeb;">| </span>Announcements</b></h1>
 
 <div class="row">
-  <div class="col-lg-8 col-lg-offset-2">
+  <div class="col-lg-8">
+    <div class="row split-side">
+      <div class="col-lg-12">
+        <div class="text-justify lightx split-top">
+          <ul class="list-group">
+            @foreach ($ann as $key)
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <img src="{{$key->post_thumb}}" class="img-responsive" />
+                  </div>
+                  <div class="col-lg-10">
+                    <h2 class="list-group-item-heading">{!! $key->post_title !!}</h2>
+                    <p class="list-group-item-text">{!! html_entity_decode(str_limit($key->post_content, 300))!!}</p>
+                    <button class="btn btn-md btn-primary view-m-post" data-toggle="modal" data-target="#viewModal" value="{{$key->id}}">View</button>
+                  </div>
+                </div>
+              </li>
+            @endforeach
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        Account
+        Your Account
       </div>
       <div class="panel-body">
         <div class="table-responsive">
@@ -45,8 +69,35 @@
       </div>
     </div>
   </div>
+
 </div>
 
+
+<div class="modal fade" id="viewModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-capitalize">Preview of this post</h4>
+        </div>
+        <div class="modal-body">
+          <h4 class="post_title text-capitalize"></h4>
+          <div class="row">
+            <div class="col-lg-12">
+              <img class="img-responsive post_thumb" />
+              <blockquote class="post_content"></blockquote>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+  </div>
+</div>
 
 
 @endsection

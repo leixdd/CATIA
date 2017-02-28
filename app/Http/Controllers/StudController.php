@@ -29,8 +29,6 @@ class StudController extends Controller
 
      }
 
-
-
     public function index(Request $request)
     {
         //checking session already inserted
@@ -41,7 +39,7 @@ class StudController extends Controller
           $set = explode("-", $request->cookie('sname'));
           $request->session()->put('std', $set[0]);
           $id_set = $set[1];
-          $lst = post::get();
+          $lst = post::orderBy('is_main', 'desc')->get();
           return view('Client\student', compact('id_set', 'lst'));
             //session()->save();
 
@@ -127,10 +125,12 @@ class StudController extends Controller
         foreach($app_pro as $ap){
           $course_id = $ap['course_id'];
         }
+
+        $ann = post::where('is_main', 1)->get();
         $course = listCourse::find($course_id)->course;
         $fee = listCourse::find($course_id)->fee;
         $id_set = $id;
-        return view('Client/account', compact('app_pro','course', 'fee', 'id_set'));
+        return view('Client/account', compact('app_pro','course', 'fee', 'id_set', 'ann'));
     }
 
     /**

@@ -148,17 +148,16 @@
                         <li><a href="{{ url('/login') }}">You're not logged in</a></li>
                     @else
 
-                    <li id="panel-dow">
-                        <a href="{{ url('/logout') }}"><span class="glyphicon glyphicon-log-out">&nbsp;</span>Logout</a>
-                        <a href="/list_pending"><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</a>
-                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user">&nbsp;</span>{{ Auth::user()->name }}</a></li>
                     <li><a href="/adminpanel"><span class="glyphpro glyphpro-dashboard">&nbsp;</span>Dashboard</a></li>
-                    <li><a href="/list_pending"><span class="glyphpro glyphpro-nameplate">&nbsp;</span>Pending Applicants</a></li>
-                    <li><a href="/list_confirm"><span class="glyphpro glyphpro-nameplate_alt">&nbsp;</span>Confirm Applicants</a></li>
+                    <li><a href="{{ url('/course') }}"><span class="glyphicon glyphicon-book">&nbsp;</span>Courses</a></li>
+                    <li><a href="{{ route('course.create')}}"><span class="glyphicon glyphicon-leaf">&nbsp;</span>New Course</a>
+                    <li><a href="{{ url('/post') }}"><span class="glyphicon glyphicon-paperclip">&nbsp;</span>Post</a></li>
+                    <li><a href="{{ route('post.create')}}"><span class="glyphicon glyphicon-file">&nbsp;</span>New Post</a></li>
+                    <li><a href="/getCourses"><span class="glyphpro glyphpro-nameplate_alt" style="color: red;">&nbsp;</span>Applicants</a></li>
                     <li><a href="/newAdmin"><span class="glyphpro glyphpro-user_add" style="color: #209eeb;">&nbsp;</span>New Admin Account</a></li>
                     <li><a href="/msg_nt"><span class="glyphicon glyphicon-comment" style="color: green;">&nbsp;</span>Messages</a></li>
-                    <li><a href="{{ route('post.create')}}"><span class="glyphicon glyphicon-heart" style="color: red;">&nbsp;</span>CMS</a></li>
-
+                    <li><a href="{{ url('/logout') }}"><span class="glyphicon glyphicon-log-out">&nbsp;</span>Logout</a></li>
                     @endif
                 </ul>
             </div>

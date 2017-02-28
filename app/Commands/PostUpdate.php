@@ -14,14 +14,17 @@ class PostUpdate extends Command implements SelfHandling
     public $author;
     public $thumb;
     public $content;
+    public $isa;
 
-    public function __construct($id, $title, $content, $author, $thumb)
+    public function __construct($id, $title, $content, $author, $thumb, $isa )
     {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->author = $author;
         $this->thumb = $thumb;
+        $this->isa = $isa;
+
     }
 
     public function handle()
@@ -30,7 +33,9 @@ class PostUpdate extends Command implements SelfHandling
         'post_title' => $this->title,
         'post_content' => $this->content,
         'post_author' => $this->author,
-        'post_thumb' => $this->thumb
+        'post_thumb' => $this->thumb,
+        'is_main' => $this->isa
+
       ));
     }
 }

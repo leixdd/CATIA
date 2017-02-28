@@ -421,10 +421,18 @@ class ApplicantController extends Controller
         $delete_personalcommand = new DeletePersonalCommand($id);
         $delete_othercommand = new DeleteOtherCommand($id);
 
+        $app_pro = manpower_profile::find($id);
+
+        $last_batch = batching::orderBy('id','desc')->first();
+
+        $this->dispatch(new batchUpdate($app_pro->batch, $last_batch['tenthActivation'], ($last_batch['population'] - 1 )));
+
         $this->dispatch($delete_command);
         $this->dispatch($delete_personalcommand);
         $this->dispatch($delete_othercommand);
         AppAcc::where('manpower_id', $id)->delete();
+
+
 
         return \Redirect::route('adminpanel.index')
                 ->with('message', 'Applicant #' . $id . ' already deleted to the list');

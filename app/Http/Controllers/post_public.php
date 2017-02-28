@@ -16,13 +16,13 @@ class post_public extends Controller
      */
     public function index()
     {
-      $lst = post::get();
+      $lst = post::where('is_main', 0)->get();
       return view('pos/post_list', compact('lst'));
     }
 
     public function get_in()
     {
-      $lst = post::limit(3)->get();
+      $lst = post::where('is_main', 0)->limit(3)->get();
       return view('index', compact('lst'));
     }
 

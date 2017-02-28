@@ -21,9 +21,19 @@
                 {!! Form::label('cnt', 'Post Content')!!}
                   {!! Form::textarea('cnt', $value = $post_single->post_content, $attributes = ['id' => 'summernote', 'class' => 'form-control', 'required', 'name' => 'cnt'])!!}
               </div>
-              <div class="form-group">
-                {!! Form::label('thumb', 'Post Thumbnail (Optional)')!!}
-                {!! Form::file('thumb', $attributes = ['class' => 'form-control btn btn-default']) !!}
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    {!! Form::label('thumb', 'Post Thumbnail (Optional)')!!}
+                    {!! Form::file('thumb', $attributes = ['class' => 'form-control btn btn-default']) !!}
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    {!! Form::label('announcement', 'Is an announcement?')!!}
+                    {!! Form::select('announcement', array('0' => 'No', '1' => 'Yes'), $post_single->is_main, $attributes = ['class' => 'form-control', 'name' => 'announcement']) !!}
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 {!! Form::submit('POST',$attributes = ['class' => 'form-control btn btn-primary btn-xs']); !!}

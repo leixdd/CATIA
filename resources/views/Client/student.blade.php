@@ -26,7 +26,7 @@
                     <img src="{{$key->post_thumb}}" class="img-responsive" />
                   </div>
                   <div class="col-lg-10">
-                    <h2 class="list-group-item-heading">{!! $key->post_title !!}</h2>
+                    <h2 class="list-group-item-heading">@if($key->is_main === 1) (Announcement) @endif {!! $key->post_title !!}</h2>
                     <p class="list-group-item-text">{!! html_entity_decode(str_limit($key->post_content, 300))!!}</p>
                     <button class="btn btn-md btn-primary view-m-post" data-toggle="modal" data-target="#viewModal" value="{{$key->id}}">View</button>
                   </div>

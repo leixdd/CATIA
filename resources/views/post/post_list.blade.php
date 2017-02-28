@@ -23,7 +23,11 @@
             </thead>
             <tbody>
               @foreach ($post_list as $key)
-                <tr>
+                @if($key->is_main == 1)
+                  <tr class="success">
+                @else
+                  <tr>
+                @endif
                   <td>{{$key->id}}</td>
                   <td>{{$key->post_title}}</td>
                   <td>{{$key->post_author}}</td>
@@ -33,8 +37,11 @@
                   <td class="text-center">
                     <a type="button" class="btn btn-xs btn-success" href="/post/{{$key->id}}/edit"><span class="glyphicon glyphicon-pencil"></span></a>
                   </td>
+
                   <td class="text-center">
-                      <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash"></button>
+                    {!! Form::open(array('action' => ['post_admin@destroy', $key->id], 'method' => 'DELETE', 'enctype' => 'multipart/form-data')) !!}
+                        <button type="submit" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></button>
+                    {!! Form::close() !!}
                   </td>
                 </tr>
               @endforeach
@@ -45,34 +52,6 @@
     </div>
   </div>
 
-
-  <div id="deleteModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-xs">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Delete this Post?</h4>
-        </div>
-        <div class="modal-body">
-          @foreach($post_list as $list_app)
-            <?php $app_id = $list_app->id; ?>
-          @endforeach
-          {!! Form::open(array('action' => ['post_admin@destroy', $app_id], 'method' => 'DELETE', 'enctype' => 'multipart/form-data')) !!}
-            <div class="text-center">
-              <h4>Are you sure you want to delete this Post?</h4>
-              <button type="submit" class="btn btn-lg btn-danger"><h1>Yes, Please Continue.</h1></span></button>
-            </div>
-          {!! Form::close() !!}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
   <div class="modal fade" id="viewModal" role="dialog">
     <div class="modal-dialog modal-lg">

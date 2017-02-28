@@ -26,7 +26,7 @@ class post_admin extends Controller
 
     public function index()
     {
-        $post_list = post::get();
+        $post_list = post::orderBy('is_main', 'desc')->get();
         return view('post/post_list', compact('post_list'));
     }
 
@@ -60,7 +60,7 @@ class post_admin extends Controller
 
       //list commands
 
-      $post = new PostCommand(0, $request->input('title'),$request->input('cnt'),$request->input('user'),$applicant_image_filename);
+      $post = new PostCommand(0, $request->input('title'),$request->input('cnt'),$request->input('user'),$applicant_image_filename, $request->input('announcement'));
       $this->dispatch($post);
 
       return \Redirect::route('adminpanel.index')
@@ -110,7 +110,7 @@ class post_admin extends Controller
           $applicant_image_filename = $current_applicant_image;
       }
 
-      $updatePost = new PostUpdate($id, $request->input('title'),$request->input('cnt'),$request->input('user'),$applicant_image_filename);
+      $updatePost = new PostUpdate($id, $request->input('title'),$request->input('cnt'),$request->input('user'),$applicant_image_filename,$request->input('announcement'));
       $this->dispatch($updatePost);
 
       return \Redirect::route('adminpanel.index')
