@@ -45,7 +45,6 @@ class pubRegis extends Controller
     {
         $id = 0;
         $entry_date = \Carbon\Carbon::now();
-        $expire_date = $entry_date->addDays(7)->toFormattedDateString();
         $last_name = $request->input('last_name');
         $first_name = $request->input('first_name');
         $middle_name = $request->input('middle_name');
@@ -85,7 +84,7 @@ class pubRegis extends Controller
 
         //list commands
 
-        $main_command = new StoreApplicantCommand($id, $applicant_image_filename, $entry_date, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment , $course_id, 0);
+        $main_command = new StoreApplicantCommand($id, $applicant_image_filename, $entry_date->addDays(7), $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment , $course_id, 0);
 
         $returned = $this->dispatch($main_command);
         $returned_id = $returned->id;
@@ -120,7 +119,7 @@ class pubRegis extends Controller
                 ->with('man_id', $returned_id)
                 ->with('payment', $payment)
                 ->with('remBal', $remBal)
-                ->with('exp', $expire_date);
+                ->with('exp',  $entry_date->addDays(7)->toFormattedDateString());
     }
 
 

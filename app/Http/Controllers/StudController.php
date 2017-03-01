@@ -29,23 +29,47 @@ class StudController extends Controller
 
      }
 
+
+
     public function index(Request $request)
     {
-        //checking session already inserted
-        if($request->session()->has('std_login')){
-          // $request->session()->flush();
-          // $response = new Response();
-          // $response->withCookie(Cookie::forget('sname'));
-          $set = explode("-", $request->cookie('sname'));
-          $request->session()->put('std', $set[0]);
-          $id_set = $set[1];
-          $lst = post::orderBy('is_main', 'desc')->get();
-          return view('Client\student', compact('id_set', 'lst'));
-            //session()->save();
+      //checking session already inserted
+      if($request->session()->has('std_login')){
+        // $request->session()->flush();
+        // $response = new Response();
+        // $response->withCookie(Cookie::forget('sname'));
+        $set = explode("-", $request->cookie('sname'));
+        $request->session()->put('std', $set[0]);
+        $id_set = $set[1];
+        $lst = post::where('is_main', 0)->get();
+        return view('Client\student', compact('id_set', 'lst'));
+          //session()->save();
 
-        }else{
-          return view('Client\login');
-        }
+      }else{
+        return view('Client\login');
+      }
+
+
+    }
+
+    public function ann(Request $request){
+      //checking session already inserted
+      if($request->session()->has('std_login')){
+        // $request->session()->flush();
+        // $response = new Response();
+        // $response->withCookie(Cookie::forget('sname'));
+        $set = explode("-", $request->cookie('sname'));
+        $request->session()->put('std', $set[0]);
+        $id_set = $set[1];
+        $ann = post::where('is_main', 1)->get();
+
+        $lst = post::orderBy('is_main', 'desc')->get();
+        return view('Client\ann', compact('id_set', 'lst', 'ann'));
+          //session()->save();
+
+      }else{
+        return view('Client\login');
+      }
     }
 
     public function stg(Request $request){
@@ -77,8 +101,7 @@ class StudController extends Controller
             return redirect('/cs')
                   ->with('std_n', $value->username."-".$value->manpower_id);
           }else{
-            //test
-
+            return view('Client\login');
           }
         }
       }
@@ -115,22 +138,37 @@ class StudController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+      //checking session already inserted
+      if($request->session()->has('std_login')){
+        // $request->session()->flush();
+        // $response = new Response();
+        // $response->withCookie(Cookie::forget('sname'));
+        $set = explode("-", $request->cookie('sname'));
+        $request->session()->put('std', $set[0]);
+        $id_set = $set[1];
         $app_pro = manpower_profile::with('personal_infos', 'other_infos')->where("id", $id)->get();
         foreach($app_pro as $ap){
           $course_id = $ap['course_id'];
         }
 
-        $ann = post::where('is_main', 1)->get();
+
         $course = listCourse::find($course_id)->course;
         $fee = listCourse::find($course_id)->fee;
         $id_set = $id;
-        return view('Client/account', compact('app_pro','course', 'fee', 'id_set', 'ann'));
+        return view('Client/account', compact('app_pro','course', 'fee', 'id_set'));
+          //session()->save();
+
+      }else{
+        return view('Client\login');
+      }
+
+
     }
 
     /**

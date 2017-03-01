@@ -198,6 +198,7 @@
                 <a href="{{ url('/O_portal') }}"><span class="glyphicon glyphicon-log-out">&nbsp;</span>Logout</a>
             </li>
             <li><a href="/students"><span class="glyphpro glyphpro-dashboard">&nbsp;</span>Newsfeed</a></li>
+            <li><a href="/ann"><span class="glyphpro glyphpro-nameplate_alt">&nbsp;</span>Announcements</a></li>
             <li><a href="/students/{{$id_set}}"><span class="glyphicon glyphicon-comment" style="color: green;">&nbsp;</span>Account</a></li>
           </ul><br>
       </div>

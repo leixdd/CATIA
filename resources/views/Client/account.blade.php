@@ -10,31 +10,7 @@
 <h1 style="padding-bottom: 50px;"><b><span style="color: #209eeb;">| </span>Announcements</b></h1>
 
 <div class="row">
-  <div class="col-lg-8">
-    <div class="row split-side">
-      <div class="col-lg-12">
-        <div class="text-justify lightx split-top">
-          <ul class="list-group">
-            @foreach ($ann as $key)
-              <li class="list-group-item">
-                <div class="row">
-                  <div class="col-lg-2">
-                    <img src="{{$key->post_thumb}}" class="img-responsive" />
-                  </div>
-                  <div class="col-lg-10">
-                    <h2 class="list-group-item-heading">{!! $key->post_title !!}</h2>
-                    <p class="list-group-item-text">{!! html_entity_decode(str_limit($key->post_content, 300))!!}</p>
-                    <button class="btn btn-md btn-primary view-m-post" data-toggle="modal" data-target="#viewModal" value="{{$key->id}}">View</button>
-                  </div>
-                </div>
-              </li>
-            @endforeach
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-4">
+  <div class="col-lg-8 col-lg-offset-2">
     <div class="panel panel-primary">
       <div class="panel-heading">
         Your Account

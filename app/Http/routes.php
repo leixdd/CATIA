@@ -22,6 +22,7 @@
 Route::get('/cg', 'StudController@stg');
 Route::get('/cs', 'StudController@sts');
 
+Route::resource('/ann', 'StudController@ann');
 //Route::get('/b', 'ApplicantController@batching');
 Route::resource('pgc', 'CMS_Course@pub_getCourses');
 Route::resource('genbatch', 'ApplicantController@batch_gen');
