@@ -121,18 +121,6 @@ Route::get('/commi', function () {
 
 Route::get('/news', ['uses' => 'post_public@index'])->name('/news');
 
-Route::get('/newsfile1', function () {
-    return view('newsfile1');
-});
-
-Route::get('/newsfile2', function () {
-    return view('newsfile2');
-});
-
-Route::get('/newsfile3', function () {
-    return view('newsfile3');
-});
-
 Route::get('/registrationpro', function () {
     return view('registrationpro');
 });

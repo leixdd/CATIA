@@ -5,9 +5,7 @@
 	<div class="container-fluid split-50-top split-50-bottom lightx">
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="text-left wow fadeInUp lightx">
-					<h1 class="header-text-style"><font class="line-text-style">|</font>History</h1>
-				</div>
+				<h1 class="header-text-style text-left wow fadeInUp"><font class="line-text-style">|</font>History</h1>
 			</div>
 		</div>
 		<div class="split-40-side">

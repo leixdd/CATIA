@@ -8,14 +8,15 @@ body {
 .lightx {
     font-family: lightUI;
 }
-.navbar {
-    background-image: url(../images/CATIA_IMAGES/nav.jpg);
+
+.navbar{
+    background-image: url(/images/CATIA_IMAGES/nav.jpg);
+    background-size: 100% 100%;
+    width: 100%;
+    height: auto;
+    margin: 0px;
     background-repeat: no-repeat;
     background-repeat: repeat-x;
-    margin-bottom: 0px;
-    padding-top: 121px;
-    padding-bottom: 30px;
-    border-radius: 0;
     font-size:12pt;
 }
 
@@ -43,35 +44,6 @@ body {
     background-size: contain;
 }
 
-.container-size-80{
-    background-size: contain;
-    height: 80vh;
-}
-
-.container-size-100{
-    background-size: contain;
-    height: 100vh;
-}
-
-.container-size-150{
-    background-size: contain;
-    height: 150vh;
-}
-
-.container-size-200{
-    background-size: contain;
-    height: 200vh;
-}
-
-.container-size-250{
-    background-size: contain;
-    height: 250vh;
-}
-
-.text-indent{
-    text-indent:40px;
-}
-
 .header-text-style{
     font-size: 36pt;
     font-weight: bold;
@@ -89,18 +61,30 @@ body {
     font-weight:bold;
 }
 
+.text-avail-style{
+    color:#e83a4e;
+    font-size:14pt;
+    font-weight:bold;
+    padding-left: 10px;
+}
+
+.text-indent{
+    text-indent:40px;
+}
 .text-14-control{
     font-size:14pt;
 }
 .text-18-control{
     font-size:18pt;
 }
+.text-50-control{
+    font-size:50pt;
+}
 
 /*SPLIT 150*/
 .split-200-top{
     padding-top: 80%;
 }
-
 /*SPLIT 150*/
 .split-150-top{
     padding-top: 150px;
@@ -177,32 +161,6 @@ body {
     color: #209eeb
 }
 
-.split-small-top{
-    padding-top: 10px;
-}
-
-.split-side-small{
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.split-small-bottom{
-    bottom-top: 10px;
-}
-
-.split-top{
-    padding-top:40px;
-}
-
-.split-side{
-    padding-left:40px;
-    padding-right:40px;
-}
-
-.split-bottom{
-    padding-bottom: 40px;
-}
-
 .glyphicon:hover{
     color: #209eeb;
 }
@@ -213,21 +171,9 @@ body {
     background-color: #209eeb;
 }
 
-.newscover{
-    background-repeat: no-repeat;
-    background-repeat: repeat-x;
-    background-size: cover;
-    height:380px;
-}
-
-.news-header-control{
-    padding-top: 200%;
-}
-
 .testimonial-pic{
     border-radius: 50%;
 }
-
 
 
 a {
@@ -278,7 +224,103 @@ ul{
     list-style-type: none;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 320px) and (max-width: 321px){
+    .news-icon{
+        width:90%;
+    }
+
+    .header-text-style{
+        font-size: 18pt;
+    }
+    .line-text-style{
+        font-size: 30pt;
+    }
+    .title-text-style{
+       font-size:10pt;
+    }
+    .text-14-control{
+        font-size:10pt;
+    }
+    .text-18-control{
+        font-size:12pt;
+    }
+    .text-50-control{
+        font-size:40pt;
+    }
+    .btnstyle{
+        font-size: 10pt;
+        /*SPLIT 150*/
+    }
+    .split-200-top{
+        padding-top: 80%;
+    }
+    /*SPLIT 150*/
+    .split-150-top{
+        padding-top: 37px;
+    }
+    .split-150-bottom{
+        padding-bottom: 37px;
+    }
+    /*SPLIT 100*/
+    .split-100-top{
+        padding-top: 25px;
+    }
+    .split-100-bottom{
+        padding-bottom: 25px;
+    }
+    .split-90-top{
+        padding-top: 22px;
+    }
+    .split-90-bottom{
+        padding-bottom: 22px;
+    }
+    .split-80-top{
+        padding-top: 20px;
+    }
+    .split-80-bottom{
+        padding-bottom: 20px;
+    }
+    /*SPLIT 50*/
+    .split-50-top{
+        padding-top: 12px;
+    }
+    .split-50-left{
+        padding-left: 12px;
+    }
+    .split-50-bottom{
+        padding-bottom: 12px;
+    }
+    /*SPLIT 40*/
+    .split-40-top{
+        padding-top: 10px;
+    }
+    .split-40-side{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .split-40-bottom{
+        padding-bottom: 10px;
+    }
+    /*SPLIT 20*/
+    .split-20-top{
+        padding-top: 5px;
+    }
+    .split-20-bottom{
+        padding-bottom: 5px;
+    }
+    /*SPLIT 10*/
+    .split-10-top{
+        padding-top: 10px;
+    }
+    .split-10-bottom{
+        padding-bottom: 2px;
+    }
+    .split-5-left{
+        padding-left: 1px;
+    }
+}
+
+@media only screen and (min-width: 768px){
     /* For sm */
    .newsheader-text-style{
         font-size: 28pt;

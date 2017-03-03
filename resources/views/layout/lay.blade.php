@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/font-awesome.css">
 	<link rel="stylesheet" href="/css/indexstyle.css">
-
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/wow.js"></script>
@@ -109,43 +108,49 @@
 	</div>
 </div>
 <div id="whole" style="">
-	<nav id="home" class="navbar lightx">
-		<div class="container-fluid">
-			<div class="navbar-header"> <!--GLYPHICON menu / logo-->
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-header">
-					<span style="color: #ffffff; font-size: 25pt;" class="glyphicon glyphicon-menu-hamburger"></span>
-				</button>
-				<img src="/images/CATIA_IMAGES/catialogo.png" style="position: absolute; left: 29px;top:45px;">
-			</div>
-			<div class="collapse navbar-collapse" id="nav-header">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="/">Home</a></li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="">About<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="/history">History</a></li>
-							<li><a href="/misvi">Mission &amp; Vision</a></li>
-							<li><a href="/commi">Commitment</a></li>
-							<li><a href="/news">Catia News</a></li>
+	<nav class="navbar">
+		<div class="container-fluid lightx split-50-top split-50-bottom">
+			<div class="row">
+				<div class="col-lg-5"><img src="/images/CATIA_IMAGES/catialogo.png" class="img-responsive">
+					<div class="navbar-header"> <!--GLYPHICON menu / logo-->
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-header">
+							<span style="color: #ffffff; font-size: 25pt;" class="glyphicon glyphicon-menu-hamburger"></span>
+						</button>
+					</div>
+				</div>
+				<div class="col-lg-7 split-40-top">
+					<div class="collapse navbar-collapse" id="nav-header">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="active"><a href="/">Home</a></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="">About<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="/history">History</a></li>
+									<li><a href="/misvi">Mission &amp; Vision</a></li>
+									<li><a href="/commi">Commitment</a></li>
+									<li><a href="/news">Catia News</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="">Admission<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="/registrationpro">Registration Procedure</a></li>
+									<li><a href="/join/create">Online Registration</a></li>
+									<li><a href="/students">Applicant Login</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="">Program<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="/training">Training Courses</a></li>
+									<li><a href="/facility">Facilities</a></li>
+								</ul>
+							</li>
+							<li><a href="/gallery">Gallery</a></li>
+							<li><a href="#contact">Contact</a></li>
 						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="">Admission<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="/registrationpro">Registration Procedure</a></li>
-							<li><a href="/join/create">Online Registration</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="">Program<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="/training">Training Courses</a></li>
-							<li><a href="/facility">Facilities</a></li>
-						</ul>
-					</li>
-					<li><a href="/gallery">Gallery</a></li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -155,7 +160,7 @@
 	<section id="contact" class="container-size-flexible container-color-lightblack" style="color:#ffffff; margin-top:-1.7%;">
 		<div class="container-fluid img-responsive text-left lightx split-50-top split-50-bottom split-40-side">
 			<div class="row">
-				<div class="col-lg-5">
+				<div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
 					<img src="/images/CATIA_IMAGES/catialogo.png">
 					<p class="split-20-top title-text-style">CONTACT US</p>
 					{!! Form::open(['route' => 'msg_nt.store', 'enctype' => 'multipart/form-data']) !!}
@@ -175,21 +180,21 @@
 			      			{!! Form::textarea('msgx' ,$value = null, $attributes = ['required', 'class' => 'form-control', 'name' => 'msgx']); !!}
 							</div>
 							 <div class="g-recaptcha" data-sitekey="6LcQzAgUAAAAADsYFOhtOi4qSr7rR6kwWHNORYIF"></div>
-							 <button type="submit" class="btn btnstyle">Submit</button>
+							<button type="submit" class="btn btnstyle">Submit</button>
 			  	{!! Form::close() !!}
 					{!! Captcha::script() !!}
 				</div>
 
-				<div class="col-lg-1"></div>
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
 
-				<div class="col-lg-3 split-20-top">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 split-20-top">
 					<p class="split-100-top title-text-style">OUR LOCATION</p>
 					<i class="fa fa-home"></i>
 					<span class="split-5-left">Gate 2, Tesda Complex East<br>
 						Service Road, South Superhighway<br>
 						Taguig City</span>
 				</div>
-				<div class="col-lg-3 split-20-top">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 split-20-top">
 					<p class="split-100-top title-text-style">CALL US</p>
 					<i class="fa fa-phone split-10-bottom"></i>
 					<span class="split-5-left">CATIAFI - 546-5942</span>
@@ -202,28 +207,28 @@
 				</div>
 
 
-				<div class="col-lg-1"></div>
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
 
-				<div class="col-lg-6 split-50-top">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 split-50-top">
 					<p class="split-20-top title-text-style">FOLLOW US</p>
-					<div class="col-lg-4">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<a href=""><i class="fa fa-facebook-f split-10-bottom"></i>
 						<span class="split-5-left">Facebook</span></a>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<a href=""><i class="fa fa-google-plus split-10-bottom"></i>
 						<span class="split-5-left">Google</span></a>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<a href=""><i class="fa fa-twitter"></i>
 						<span class="split-5-left">Twitter</span></a>
 					</div>
 				</div>
 
 
-				<div class="col-lg-1"></div>
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
 
-				<div class="col-lg-6">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<p class="split-80-top"><font style="color:#209eeb;">Catiafi in Partnership with
 						<img src=""><a href="http://www.tesda.gov.ph/">Tesda</a></p>
 
