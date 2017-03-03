@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="panel-body">
-          View All Applicants<a href="list_pending_CS"><span style="float: right;" class="glyphicon glyphicon-circle-arrow-right"></span></a>
+          View All Applicants<a href="/getCourses"><span style="float: right;" class="glyphicon glyphicon-circle-arrow-right"></span></a>
         </div>
       </div>
     </div>

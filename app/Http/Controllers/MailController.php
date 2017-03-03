@@ -51,20 +51,21 @@ class MailController extends Controller
       $data = array('name'=> $request->input('r_name'),
                     'msg' => $request->input('s_msg'));
 
-      // $x = Mail::send(['text'=>'mail'], $data, function($message) {
+      $re = $request->input('r_email');
+      $x = Mail::send(['text'=>'mail'], $data, function($message) use ($re) {
+
+      $message->to($re, 'Tutorials Point')->subject('Message from catia');
+      $message->from('catia.foundation@gmail.com','CATIA');
+
+      });
+
+      // $headers = 'From: catia.foundation@gmail.com \r\n'.
       //
-      // $message->to(session('r_e'), 'Tutorials Point')->subject('Message from catia');
-      // $message->from('catia.foundation@gmail.com','CATIA');
+      // 'Reply-To: '.$request->input('r_email')."\r\n" .
       //
-      // });
-
-      $headers = 'From: catia.foundation@gmail.com \r\n'.
-
-      'Reply-To: '.$request->input('r_email')."\r\n" .
-
-      'X-Mailer: PHP/' . phpversion();
-      
-      mail($request->input('r_email'), 'Message from catia', $request->input('s_msg'), $headers);
+      // 'X-Mailer: PHP/' . phpversion();
+      //
+      // mail($request->input('r_email'), 'Message from catia', $request->input('s_msg'), $headers);
 
       $now = \Carbon\Carbon::now();
       $d_msg = new Storerep_logs(0,$request->input('r_id'), $request->input('r_name'), $request->input('s_msg'), $now, $request->input('r_email'));
