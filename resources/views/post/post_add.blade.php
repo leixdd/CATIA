@@ -30,8 +30,8 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    {!! Form::label('announcement', 'Is an announcement?')!!}
-                    {!! Form::select('announcement', array('0' => 'No', '1' => 'Yes'), '0', $attributes = ['class' => 'form-control', 'name' => 'announcement']) !!}
+                    {!! Form::label('announcement', 'Who should see this?')!!}
+                    {!! Form::select('announcement', array('0' => 'Public', '1' => 'Private (Registered Applicants only)'), '0', $attributes = ['class' => 'form-control', 'name' => 'announcement']) !!}
                   </div>
                 </div>
               </div>

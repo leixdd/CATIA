@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="panel-body">
-          View All Issues (Test Mode)<a href="/list_pending"><span style="float: right;" class="glyphicon glyphicon-circle-arrow-right"></span></a>
+          Access the Database for the listings of users
         </div>
       </div>
       </div>

@@ -24,7 +24,7 @@
                   <td>{{$key->id}}</td>
                   <td>{{$key->course}}</td>
                   <td class="text-center">
-                    <a type="button" class="btn btn-xs btn-danger" href="/access/{{$key->id}}-0">&nbsp;Pending</a> | <a type="button" class="btn btn-xs btn-success" href="/access/{{$key->id}}-1">&nbsp;Confirm</a>
+                    <a type="button" class="btn btn-xs btn-danger" href="/access/{{$key->id}}-0">&nbsp;Pending Applicants</a> | <a type="button" class="btn btn-xs btn-success" href="/access/{{$key->id}}-1">&nbsp;Registered Applicants</a>
                   </td>
                 </tr>
               @endforeach
