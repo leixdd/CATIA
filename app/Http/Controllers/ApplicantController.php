@@ -363,7 +363,7 @@ class ApplicantController extends Controller
 
         //list commands
 
-        $main_command = new UpdateApplicantCommand($id, $applicant_image_filename, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment, $course_id);
+        $main_command = new UpdateApplicantCommand($id, $applicant_image_filename, $last_name, $first_name, $middle_name, $num_street, $barangay, $district, $city, $province, $region, $email, $contact, $nationality, $payment, $course_id,manpower_profile::find($id)->batch);
 
         $this->dispatch($main_command);
 
