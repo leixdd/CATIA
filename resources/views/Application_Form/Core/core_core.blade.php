@@ -25,7 +25,7 @@
       </div>
     {!! Form::close() !!}
     <div class="col-lg-4 col-md-offset-1">
-      @if($status == 'Confirm')
+      @if($status == 'Registered')
     {!! Form::open(['url' => '/sortBatch', 'class' => 'form-horizontal']) !!}
       <div class="form-group">
         {!! Form::label('', 'Print &amp; Batch Sort') !!}
