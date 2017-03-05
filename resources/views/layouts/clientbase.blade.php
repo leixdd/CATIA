@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" >
     <link rel="stylesheet" href="/css/glyphicons.pro.css">
 
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <script src="/js/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -66,8 +65,8 @@
             font-family: lightUI;
         }
 
-
         body {
+
             font-family: 'lightUI';
             margin: 0;
         }

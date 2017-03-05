@@ -43,9 +43,9 @@ class ApplicantController extends Controller
     {
     }
 
-    public function batch_gen(){
+    public function batch_gen($id){
 
-      $rv = batching::get();
+      $rv = batching::where('course_id', $id)->get();
       return $rv;
     }
 
@@ -81,7 +81,7 @@ class ApplicantController extends Controller
             return view('Application_Form/Core/core_core', compact('app_pro', 'condition', 'course', 'fee', 'status', 'emerghed', 'supereme', 'today'));
         }
       }else{
-        return ApplicantController::AccessingLink(implode("-",array($emerghed,$supereme)));
+        return ApplicantController::AccessingLink(implode("-",array($supereme,$emerghed)));
       }
 
     }
@@ -101,7 +101,7 @@ class ApplicantController extends Controller
       $today = \Carbon\Carbon::now();
       $condition = 'a';
       $status = $access == 1 ? 'Registered' : 'Pending';
-      $emerghed = $access; 
+      $emerghed = $access;
       $supereme = $coursecode;
       $course = listCourse::find($coursecode)->course;
       if (manpower_profile::with('personal_infos', 'other_infos')
@@ -140,19 +140,22 @@ class ApplicantController extends Controller
       }
     }
 
-    public function batching()
+    public function batching($c_id)
     {
         $advanced = \Carbon\Carbon::now()->addDays(2);
-        $last_batch = batching::orderBy('id','desc')->first();
-        if($last_batch['population'] === 10){
-          $this->dispatch(new batchUpdate($last_batch['id'], \Carbon\Carbon::now(), ($last_batch['population'] + 1 )));
+        $last_batch = batching::where('course_id', $c_id)->orderBy('id','desc')->first();
+        if(batching::where('course_id', $c_id)->count() === 0){
+          $this->dispatch(new batchingTick(0, ($last_batch['batch'] + 1), 1, 0000-00-00, $c_id));
+        }
+        elseif($last_batch['population'] === 10){
+          $this->dispatch(new batchUpdate($last_batch['id'], \Carbon\Carbon::now(), ($last_batch['population'] + 1)));
         }elseif ($last_batch['population'] === 15 || $advanced->toDateString() === $last_batch['tenthActivation']) {
-          $this->dispatch(new batchingTick(0, ($last_batch['batch'] + 1), 1, 0000-00-00));
+          $this->dispatch(new batchingTick(0, ($last_batch['batch'] + 1), 1, 0000-00-00, $c_id));
         }else{
-          $this->dispatch(new batchUpdate($last_batch['id'], $last_batch['tenthActivation'], ($last_batch['population'] + 1 )));
+          $this->dispatch(new batchUpdate($last_batch['id'], $last_batch['tenthActivation'], ($last_batch['population'] + 1)));
         }
 
-        $refresh = batching::orderBy('id','desc')->first();
+        $refresh = batching::where('course_id', $c_id)->orderBy('id','desc')->first();
         return $refresh['batch'];
 
     }
@@ -396,7 +399,7 @@ class ApplicantController extends Controller
         $is_active = 0;
         if ($check_bal == 0) {
             $is_active = 1;
-            $main_command = new FullPaid($id, $is_active, ApplicantController::batching());
+            $main_command = new FullPaid($id, $is_active, ApplicantController::batching(manpower_profile::find($id)->course_id));
 
             $this->dispatch($main_command);
             return \Redirect::route('adminpanel.index')

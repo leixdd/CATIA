@@ -23,6 +23,8 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jspdf.min.js"></script>
+    <script src="/js/jspdf.plugin.autotable.js"></script>
+
     <script src="/summernote/dist/summernote.js"></script>
     <style>
 

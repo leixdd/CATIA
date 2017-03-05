@@ -8,7 +8,7 @@ class batching extends Model
 {
   protected $table = "batching";
 
-  protected $fillable = ['id', 'batch', 'population', 'tenthActivation'];
+  protected $fillable = ['id', 'batch', 'population', 'tenthActivation', 'course_id'];
 
   protected $hidden = [];
 }

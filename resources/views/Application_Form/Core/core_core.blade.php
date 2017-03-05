@@ -15,7 +15,7 @@
         <div class="form-group">
           {!! Form::label('search_name', 'Search by First Name or Last Name and could be Middle Name') !!}
           {!! Form::text('search_name', $value = null, $attributes = ['required','class' => 'form-control', 'name' => 'search_name']) !!}
-          {!! Form::hidden('path', $value = $supereme, $attributes = ['class' => 'form-control', 'name' => 'path']) !!}
+          {!! Form::hidden('path', $value = $supereme, $attributes = ['class' => 'form-control path', 'name' => 'path']) !!}
           {!! Form::hidden('accessx', $value = $emerghed, $attributes = ['class' => 'form-control', 'name' => 'accessx']) !!}
         </div>
         <div class="form-group">
@@ -33,7 +33,7 @@
         {!! Form::hidden('accessx', $value = $emerghed, $attributes = ['class' => 'form-control', 'name' => 'accessx']) !!}
         <div class="row">
           <div class="col-sm-9">
-              {!! Form::select('batch_sort',  array('0' => 'All Students'), 'All Students', $attributes = [ 'required','class' => 'form-control batch_sort', 'name' => 'batch_sort']) !!}
+              {!! Form::select('batch_sort',  array('0' => 'All Students'), 'All Students', $attributes = [ 'id' => $supereme, 'required','class' => 'form-control batch_sort', 'name' => 'batch_sort']) !!}
           </div>
           <div class="col-sm-3">
             {!! Form::submit('Sort', $attributes = ['class' => 'btn btn-danger btn-md form-control']); !!}
@@ -199,46 +199,44 @@
         Gate 2, Tesda Complex East Service Road, South Superhighway Taguig City
       </div>
       <div class="col-lg-12 col-md-offset-1" style="margin-bottom: 3%;">
-          <b style="font-size: 16pt">{{$course}} - {{$status}} Applicants</b>
+          <b style="font-size: 16pt" id="cx">{{$course}} - {{$status}} Applicants</b>
       </div>
 
       @if($condition === 'c')
       <div class="col-lg-12 col-md-offset-1" style="margin-bottom: 3%;">
-          @foreach($app_pro as $list_app)
-          <b style="font-size: 16pt; padding-left: 17%;">Batch {{$list_app->batch}}</b>
-          @endforeach
+          <b style="font-size: 16pt; padding-left: 17%;" id="batx">Batch {{$emerghed}}</b>
       </div>
       @endif
     </div>
-      <table id="db" class="table table-bordered table-condensed table-hover" style="width:100%">
-          <tr>
-            <th>id</th>
-            @if($status == 'Pending')
-
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Middlename</th>
-
-            <th class="text-center">Course Fee</th>
-            <th class="text-center">Payment</th>
-            <th class="text-center">Balance</th>
-            @else
-
-            @if($condition !== 'c')
-            <th>Batch</th>
-            @endif
-
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Middlename</th>
-            <th class="text-center">Contact</th>
-            <th class="text-center">Address</th>
-            @endif
-          </tr>
-          <tbody>
-          </tbody>
-      </table>
   </div>
+  <table id="db" class="table table-bordered table-condensed table-hover" style="width:100%">
+      <tr>
+        <th>id</th>
+        @if($status == 'Pending')
+
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Middlename</th>
+
+        <th class="text-center">Course Fee</th>
+        <th class="text-center">Payment</th>
+        <th class="text-center">Balance</th>
+        @else
+
+        @if($condition !== 'c')
+        <th>Batch</th>
+        @endif
+
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Middlename</th>
+        <th class="text-center">Contact</th>
+        <th class="text-center">Address</th>
+        @endif
+      </tr>
+      <tbody>
+      </tbody>
+  </table>
   @endif
   <div class="modal fade" id="viewModal" role="dialog">
     <div class="modal-dialog modal-lg">

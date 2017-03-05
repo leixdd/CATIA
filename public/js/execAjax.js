@@ -10,9 +10,11 @@ $(document).ready(function(){
       });
     });
 
-$.get('/genbatch',function(data){
+$.get('/genbatch/' + $(".path").val(),function(data){
     $.each(data, function(i, res){
-        $("select.batch_sort").append("<option value="+res.id+"> Batch "+res.batch+" ("+ res.population + " students)</option>")
+
+        $("select.batch_sort").append("<option value="+res.batch+"> Batch "+res.batch+" ("+ res.population + " students)</option>")
+
     });
   });
 
@@ -121,44 +123,65 @@ $('.xclose').click(function(){
        f.innerHTML = array[index].Contact;
        g.innerHTML = array[index].Address;
      });
-     var pdf = new jsPDF('p', 'pt', 'letter');
-      // source can be HTML-formatted string, or a reference
-      // to an actual DOM element from which the text will be scraped.
-      source = $('#pdb')[0];
 
-      // we support special element handlers. Register them with jQuery-style
-      // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-      // There is no support for any other type of selectors
-      // (class, of compound) at this time.
-      specialElementHandlers = {
-          // element with id of "bypass" - jQuery style selector
-          '#bypassme': function (element, renderer) {
-              // true = "handled elsewhere, bypass text extraction"
-              return true
-          }
-      };
-      margins = {
-          top: 80,
-          bottom: 60,
-          left: 40,
-          width: 522
-      };
-      // all coords and widths are in jsPDF instance's declared units
-      // 'inches' in this case
-      pdf.fromHTML(
-      source, // HTML string or DOM elem ref.
-      margins.left, // x coord
-      margins.top, { // y coord
-          'width': margins.width, // max width of content on PDF
-          'elementHandlers': specialElementHandlers
-      },
+          var pdf = new jsPDF();
+          var base64Img = null;
+          var totalPagesExp = "{total_pages_count_string}";
+          imgToBase64('Catia_Logo.png', function(base64) {
+               base64Img = base64;
+          });
 
-      function (dispose) {
-        var d = new Date();
-          // dispose: object with X, Y of the last line add to the PDF
-          //          this allow the insertion of new lines after html
+          function imgToBase64(url, callback) {
+               if (!window.FileReader) {
+                   callback(null);
+                   return;
+               }
+               var xhr = new XMLHttpRequest();
+               xhr.responseType = 'blob';
+               xhr.onload = function() {
+                   var reader = new FileReader();
+                   reader.onloadend = function() {
+                       callback(reader.result.replace('text/xml', 'image/jpeg'));
+                   };
+                   reader.readAsDataURL(xhr.response);
+               };
+               xhr.open('GET', url);
+               xhr.send();
+           }
+
+
+          var pageContent = function (data) {
+               // HEADER
+               pdf.setFontSize(20);
+               pdf.setTextColor(40);
+               pdf.setFontStyle('normal');
+               pdf.text($("#batx").text() + " Report", data.settings.margin.left, 22);
+               pdf.setFontSize(10);
+               pdf.text($("#cx").text(), data.settings.margin.left, 30);
+               pdf.text("CATIA", data.settings.margin.left, 35);
+               pdf.text("Gate 2, Tesda Complex East Service Road, South Superhighway Taguig City", data.settings.margin.left, 40);
+
+
+               // FOOTER
+               var str = "Page " + data.pageCount;
+               // Total page number plugin only available in jspdf v1.0+
+               if (typeof pdf.putTotalPages === 'function') {
+                   str = str + " of " + totalPagesExp;
+               }
+               pdf.setFontSize(10);
+               pdf.text(str, data.settings.margin.left, pdf.internal.pageSize.height - 10);
+
+           };
+
+          pdf.autoTable(headers, array,{
+             addPageContent: pageContent,
+             margin: {top: 43}
+           });
+           if (typeof pdf.putTotalPages === 'function') {
+               pdf.putTotalPages(totalPagesExp);
+           }
+          var d = new Date();
           pdf.save('Applicant Report - '+d.getTime()+'.pdf');
-      }, margins);
 
 
   });
@@ -173,11 +196,13 @@ $('.xclose').click(function(){
         }
      });
 
+
+
      $('#dataTable tr').has('td').each(function() {
-         var arrayItem = {};
+        var arrayItem = {};
          $('td', $(this)).each(function(index, item) {
            if(index < 6)
-             arrayItem[headers[index]] = $(item).html();
+             arrayItem[index] = $(item).text();
          });
          array.push(arrayItem);
      });
@@ -200,45 +225,67 @@ $('.xclose').click(function(){
        f.innerHTML = array[index].Address;
 
      });
-     var pdf = new jsPDF('p', 'pt', 'letter');
-      // source can be HTML-formatted string, or a reference
-      // to an actual DOM element from which the text will be scraped.
-      source = $('#pdb')[0];
 
-      // we support special element handlers. Register them with jQuery-style
-      // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-      // There is no support for any other type of selectors
-      // (class, of compound) at this time.
-      specialElementHandlers = {
-          // element with id of "bypass" - jQuery style selector
-          '#bypassme': function (element, renderer) {
-              // true = "handled elsewhere, bypass text extraction"
-              return true
+     var pdf = new jsPDF();
+     var base64Img = null;
+     var totalPagesExp = "{total_pages_count_string}";
+     imgToBase64('Catia_Logo.png', function(base64) {
+          base64Img = base64;
+     });
+
+     function imgToBase64(url, callback) {
+          if (!window.FileReader) {
+              callback(null);
+              return;
           }
-      };
-      margins = {
-          top: 80,
-          bottom: 60,
-          left: 40,
-          width: 522
-      };
-      // all coords and widths are in jsPDF instance's declared units
-      // 'inches' in this case
-      pdf.fromHTML(
-      source, // HTML string or DOM elem ref.
-      margins.left, // x coord
-      margins.top, { // y coord
-          'width': margins.width, // max width of content on PDF
-          'elementHandlers': specialElementHandlers
-      },
+          var xhr = new XMLHttpRequest();
+          xhr.responseType = 'blob';
+          xhr.onload = function() {
+              var reader = new FileReader();
+              reader.onloadend = function() {
+                  callback(reader.result.replace('text/xml', 'image/jpeg'));
+              };
+              reader.readAsDataURL(xhr.response);
+          };
+          xhr.open('GET', url);
+          xhr.send();
+      }
 
-      function (dispose) {
-        var d = new Date();
-          // dispose: object with X, Y of the last line add to the PDF
-          //          this allow the insertion of new lines after html
-          pdf.save('Applicant Report - '+d.getTime()+'.pdf');
-      }, margins);
 
+     var pageContent = function (data) {
+          // HEADER
+          pdf.setFontSize(20);
+          pdf.setTextColor(40);
+          pdf.setFontStyle('normal');
+          pdf.text($("#batx").text() + " Report", data.settings.margin.left, 22);
+          pdf.setFontSize(10);
+          pdf.text($("#cx").text(), data.settings.margin.left, 30);
+          pdf.text("CATIA", data.settings.margin.left, 35);
+          pdf.text("Gate 2, Tesda Complex East Service Road, South Superhighway Taguig City", data.settings.margin.left, 40);
+
+
+          // FOOTER
+          var str = "Page " + data.pageCount;
+          // Total page number plugin only available in jspdf v1.0+
+          if (typeof pdf.putTotalPages === 'function') {
+              str = str + " of " + totalPagesExp;
+          }
+          pdf.setFontSize(10);
+          pdf.text(str, data.settings.margin.left, pdf.internal.pageSize.height - 10);
+
+      };
+
+     pdf.autoTable(headers, array,{
+        addPageContent: pageContent,
+        margin: {top: 43}
+      });
+
+      if (typeof pdf.putTotalPages === 'function') {
+          pdf.putTotalPages(totalPagesExp);
+      }
+
+     var d = new Date();
+     pdf.save('Applicant Report - '+d.getTime()+'.pdf');
 
   });
 
@@ -280,45 +327,65 @@ $('.xclose').click(function(){
        g.innerHTML = array[index].Balance;
 
      });
-     var pdf = new jsPDF('p', 'pt', 'letter');
-      // source can be HTML-formatted string, or a reference
-      // to an actual DOM element from which the text will be scraped.
-      source = $('#pdb')[0];
 
-      // we support special element handlers. Register them with jQuery-style
-      // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-      // There is no support for any other type of selectors
-      // (class, of compound) at this time.
-      specialElementHandlers = {
-          // element with id of "bypass" - jQuery style selector
-          '#bypassme': function (element, renderer) {
-              // true = "handled elsewhere, bypass text extraction"
-              return true
-          }
-      };
-      margins = {
-          top: 80,
-          bottom: 60,
-          left: 40,
-          width: 522
-      };
-      // all coords and widths are in jsPDF instance's declared units
-      // 'inches' in this case
-      pdf.fromHTML(
-      source, // HTML string or DOM elem ref.
-      margins.left, // x coord
-      margins.top, { // y coord
-          'width': margins.width, // max width of content on PDF
-          'elementHandlers': specialElementHandlers
-      },
+          var pdf = new jsPDF();
+          var base64Img = null;
+          var totalPagesExp = "{total_pages_count_string}";
+          imgToBase64('Catia_Logo.png', function(base64) {
+               base64Img = base64;
+          });
 
-      function (dispose) {
-        var d = new Date();
-          // dispose: object with X, Y of the last line add to the PDF
-          //          this allow the insertion of new lines after html
+          function imgToBase64(url, callback) {
+               if (!window.FileReader) {
+                   callback(null);
+                   return;
+               }
+               var xhr = new XMLHttpRequest();
+               xhr.responseType = 'blob';
+               xhr.onload = function() {
+                   var reader = new FileReader();
+                   reader.onloadend = function() {
+                       callback(reader.result.replace('text/xml', 'image/jpeg'));
+                   };
+                   reader.readAsDataURL(xhr.response);
+               };
+               xhr.open('GET', url);
+               xhr.send();
+           }
+
+
+          var pageContent = function (data) {
+               // HEADER
+               pdf.setFontSize(20);
+               pdf.setTextColor(40);
+               pdf.setFontStyle('normal');
+               pdf.text($("#batx").text() + " Report", data.settings.margin.left, 22);
+               pdf.setFontSize(10);
+               pdf.text($("#cx").text(), data.settings.margin.left, 30);
+               pdf.text("CATIA", data.settings.margin.left, 35);
+               pdf.text("Gate 2, Tesda Complex East Service Road, South Superhighway Taguig City", data.settings.margin.left, 40);
+
+
+               // FOOTER
+               var str = "Page " + data.pageCount;
+               // Total page number plugin only available in jspdf v1.0+
+               if (typeof pdf.putTotalPages === 'function') {
+                   str = str + " of " + totalPagesExp;
+               }
+               pdf.setFontSize(10);
+               pdf.text(str, data.settings.margin.left, pdf.internal.pageSize.height - 10);
+
+           };
+
+          pdf.autoTable(headers, array,{
+             addPageContent: pageContent,
+             margin: {top: 43}
+           });
+           if (typeof pdf.putTotalPages === 'function') {
+               pdf.putTotalPages(totalPagesExp);
+           }
+          var d = new Date();
           pdf.save('Applicant Report - '+d.getTime()+'.pdf');
-      }, margins);
-
 
   });
 

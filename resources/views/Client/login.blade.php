@@ -5,7 +5,7 @@
     <img class="img-responsive" src="/images/CATIA_IMAGES/Catia_Logo.png"  width="15%">
 </center>
 
-<h3 class="text-center" style="margin-bottom: 2%;"><a style="color :  #000000; text-decoration: none;"  href="{{ url('/students') }}">Catia Foundation Inc.</a></h3>
+<h3 class="text-center lightx" style="margin-bottom: 2%;"><a style="color :  #ffffff; text-decoration: none; "  href="{{ url('/students') }}">Catia Foundation Inc.</a></h3>
 
 <div class="col-md-8 col-md-offset-2" style="padding-top: 2%;">
     <div class="panel panel-primary">
@@ -18,7 +18,7 @@
               {{Session::get('message')}}
             </div>
           @endif
-          
+
                 {!! Form::open(array('class' => 'form-horizontal', 'method' => 'POST', 'url' => '/portal' , 'enctype' => 'multipart/form-data')) !!}
                 {{ csrf_field() }}
 
