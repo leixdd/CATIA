@@ -173,7 +173,9 @@ $('.xclose').click(function(){
 
            };
 
-          pdf.autoTable(headers, array,{
+         var elem = document.getElementById("db");
+         var res = pdf.autoTableHtmlToJson(elem);
+          pdf.autoTable(res.columns, res.data,{
              addPageContent: pageContent,
              margin: {top: 43}
            });
@@ -275,10 +277,12 @@ $('.xclose').click(function(){
 
       };
 
-     pdf.autoTable(headers, array,{
-        addPageContent: pageContent,
-        margin: {top: 43}
-      });
+      var elem = document.getElementById("db");
+      var res = pdf.autoTableHtmlToJson(elem);
+       pdf.autoTable(res.columns, res.data,{
+          addPageContent: pageContent,
+          margin: {top: 43}
+        });
 
       if (typeof pdf.putTotalPages === 'function') {
           pdf.putTotalPages(totalPagesExp);
@@ -377,10 +381,12 @@ $('.xclose').click(function(){
 
            };
 
-          pdf.autoTable(headers, array,{
-             addPageContent: pageContent,
-             margin: {top: 43}
-           });
+           var elem = document.getElementById("db");
+           var res = pdf.autoTableHtmlToJson(elem);
+            pdf.autoTable(res.columns, res.data,{
+               addPageContent: pageContent,
+               margin: {top: 43}
+             });
            if (typeof pdf.putTotalPages === 'function') {
                pdf.putTotalPages(totalPagesExp);
            }
