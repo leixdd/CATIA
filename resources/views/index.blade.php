@@ -130,7 +130,6 @@
 					<h1 class="title-text-style split-10-top">{{ $key->post_title }}</h1>
 					<?php  $str = str_limit($key->post_content, 500)?>
 					<p class="split-10-bottom" id="setx">{!! html_entity_decode($str)!!}</p>
-					<button class="btn btnstyle"></button>
 				</div>
 			@endforeach
 		</div>
@@ -176,7 +175,7 @@
 		<div class="row>">
 			<div class="col-lg-12">
 				<div class="embed-responsive embed-responsive-16by9 center-block">
-					<iframe class="embed-responsive-item split-10-bottom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.6360420810793!2d121.03865131483913!3d14.505570989863054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cf2447d44979%3A0x392df21ecf7961c4!2sTesda+Call+Center+Training+Accredited+School!5e0!3m2!1sen!2sph!4v1473002622980"
+					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7724.758743705431!2d121.02682797054274!3d14.520279433382758!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x958fc828cf931493!2sTESDA+Training+Center+Taguig+Campus+Enterprise!5e0!3m2!1sen!2sph!4v1488632632687"
 									height="530"
 									frameborder="0"
 									style="border:0;width:100%;"

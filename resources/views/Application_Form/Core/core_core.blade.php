@@ -72,7 +72,7 @@
         </div>
       </div>
       @else
-        <h1 style="padding-top: 25px; margin-bottom: 2%;"><b><span style="color: #209eeb;">| </span>List of all {{$status}}  clients</b></h1>
+        <h1 style="padding-top: 25px; margin-bottom: 2%;"><b><span style="color: #209eeb;">| </span>List of all {{$status}}  Applicants</b></h1>
         @if($status == 'Pending')
         <div class="table-responsive">
           <table class="table table-bordered table-condensed table-hover" id="dataTable">

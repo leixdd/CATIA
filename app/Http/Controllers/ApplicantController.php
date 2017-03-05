@@ -57,7 +57,7 @@ class ApplicantController extends Controller
     public function batch_search($query,$coursecode,$access){
       $today = \Carbon\Carbon::now();
       $condition = 'a';
-      $status = $access == 1 ? 'Confirm' : 'Pending';
+      $status = $access == 1 ? 'Registered' : 'Pending';
       $emerghed = $access; //hahaha
       $supereme = $coursecode;
       $course = listCourse::find($coursecode)->course;
@@ -100,8 +100,8 @@ class ApplicantController extends Controller
     public function gen_search($query,$coursecode,$access){
       $today = \Carbon\Carbon::now();
       $condition = 'a';
-      $status = $access == 1 ? 'Confirm' : 'Pending';
-      $emerghed = $access; //hahaha
+      $status = $access == 1 ? 'Registered' : 'Pending';
+      $emerghed = $access; 
       $supereme = $coursecode;
       $course = listCourse::find($coursecode)->course;
       if (manpower_profile::with('personal_infos', 'other_infos')
@@ -163,7 +163,7 @@ class ApplicantController extends Controller
         $today = \Carbon\Carbon::now(); //$td->toDateString(); uncomment to match the earlier line
         $data = explode("-", $link);
         $condition = 'a';
-        $status = $data[1] == 1 ? 'Confirm' : 'Pending';
+        $status = $data[1] == 1 ? 'Registered' : 'Pending';
         $emerghed = $data[1]; //hahaha
         $supereme = $data[0];
         $course = listCourse::find($data[0])->course;
