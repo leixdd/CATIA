@@ -22,6 +22,9 @@
 Route::get('/cg', 'StudController@stg');
 Route::get('/cs', 'StudController@sts');
 
+Route::get('/privacy_policy', function(){
+    return view('privacy');
+});
 Route::resource('/ann', 'StudController@ann');
 //Route::get('/b', 'ApplicantController@batching');
 Route::resource('pgc', 'CMS_Course@pub_getCourses');

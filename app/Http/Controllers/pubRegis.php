@@ -89,7 +89,7 @@ class pubRegis extends Controller
         $returned = $this->dispatch($main_command);
         $returned_id = $returned->id;
 
-        $serial = "CATIA20160000" . $returned_id  . "FI";
+        $serial = "CATIA20170000" . $returned_id  . "FI";
         $remBal = listCourse::find($course_id)->fee;
         $finalbal = 0;
         if ($payment == "HALF") {
