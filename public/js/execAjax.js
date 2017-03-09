@@ -189,6 +189,7 @@ $('.xclose').click(function(){
   });
 
   $("#pz").click(function(){
+
      var url = $(this).attr("data-link");
      var array = [];
      var headers = [];
@@ -200,17 +201,19 @@ $('.xclose').click(function(){
 
 
 
+
      $('#dataTable tr').has('td').each(function() {
         var arrayItem = {};
          $('td', $(this)).each(function(index, item) {
            if(index < 6)
-             arrayItem[index] = $(item).text();
+             arrayItem[headers[index]] = $(item).text();
          });
          array.push(arrayItem);
      });
 
 
      $.each(array, function(index, item){
+
        var x = document.getElementById("db").insertRow();
        var a = x.insertCell(0);
        var b = x.insertCell(1);
@@ -227,6 +230,7 @@ $('.xclose').click(function(){
        f.innerHTML = array[index].Address;
 
      });
+
 
      var pdf = new jsPDF();
      var base64Img = null;
